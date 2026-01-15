@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../jacoco-resources/report.gif" type="image/gif"/><title>ProcessPendingShipmentsUseCaseImpl.java</title><link rel="stylesheet" href="../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../index.html" class="el_report">com.itxiop.transport:jacoco-report-aggregate</a> &gt; <a href="../index.html" class="el_bundle">hiring-challenge-application</a> &gt; <a href="index.source.html" class="el_package">com.itxiop.transport.domain.usecase</a> &gt; <span class="el_source">ProcessPendingShipmentsUseCaseImpl.java</span></div><h1>ProcessPendingShipmentsUseCaseImpl.java</h1><pre class="source lang-java linenums">package com.itxiop.transport.domain.usecase;
+
+import com.itxiop.transport.domain.entities.Route;
+import com.itxiop.transport.domain.entities.Shipment;
+import com.itxiop.transport.domain.route.repository.RouteRepositoryPort;
+import com.itxiop.transport.domain.route.vo.RouteResult;
+import com.itxiop.transport.domain.shipment.repository.ShipmentRepositoryPort;
+import com.itxiop.transport.domain.vo.ShipmentStatusEnum;
+import com.itxiop.transport.domain.vo.TransportTypeEnum;
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.time.StopWatch;
+
+import java.time.Duration;
+import java.util.*;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+/**
+ * The type Find product by id use case.
+ */
+<span class="fc" id="L24">@Slf4j</span>
+@AllArgsConstructor
+public class ProcessPendingShipmentsUseCaseImpl implements ProcessPendingShipmentsUseCase {
+    
+    RouteRepositoryPort routeRepositoryPort;
+    
+    ShipmentRepositoryPort shipmentRepositoryPort;
+
+    @Override
+    public void processPendingShipments() {
+
+<span class="fc" id="L35">        StopWatch timeMeter = StopWatch.create();</span>
+
+
+<span class="fc" id="L38">        Map&lt;TransportTypeEnum, List&lt;Route&gt;&gt; availableRoutes = routeRepositoryPort.findAvailableRoutes(List.of(TransportTypeEnum.values()));</span>
+
+<span class="fc" id="L40">        shipmentRepositoryPort.findShipments().stream()</span>
+<span class="fc" id="L41">                .filter(s -&gt; s.getStatus().equals(ShipmentStatusEnum.PENDING))</span>
+<span class="fc" id="L42">                .forEach(shipment -&gt; {</span>
+                    
+<span class="fc" id="L44">            log.info(&quot;Processing shipment: {}&quot;, shipment);</span>
+<span class="fc" id="L45">            timeMeter.start();</span>
+
+            // Basic Path #0 Single iteration over one concrete shipment type
+<span class="fc" id="L48">            List&lt;Route&gt; truckRoutes = availableRoutes.get(TransportTypeEnum.TRUCK);</span>
+<span class="fc" id="L49">            log.info(&quot;Processing route: {}&quot;, TransportTypeEnum.TRUCK);</span>
+
+            // Use Dijkstra's algorithm to find the shortest path costs from the source city to all other cities
+<span class="fc" id="L52">            RouteResult routeResult = GraphProcessor.dijkstra(truckRoutes, shipment);</span>
+<span class="fc" id="L53">            algorthimResultLogger(shipment).apply(routeResult);</span>
+<span class="fc" id="L54">            stopWatchMeter(timeMeter).accept(routeResult);</span>
+<span class="fc" id="L55">            log.info(&quot;Saving route planification for shipment: {}-{}&quot;, shipment.getOrigin().getName(), shipment.getDestination().getName());</span>
+<span class="pc bpc" id="L56" title="2 of 4 branches missed.">            if(routeResult != null &amp;&amp; routeResult.route() != null) {</span>
+<span class="fc" id="L57">                shipment.setRoutePlan(routeResult.route());</span>
+<span class="fc bfc" id="L58" title="All 2 branches covered.">                if (routeResult.cost().compareTo(Duration.between(shipment.getDepartureDate(), shipment.getExpectedArrivalDate())) &lt; 0) {</span>
+<span class="fc" id="L59">                    shipment.setStatus(ShipmentStatusEnum.PLANNED);</span>
+                } else {
+<span class="fc" id="L61">                    shipment.setStatus(ShipmentStatusEnum.DISCARDED);</span>
+                }
+            }
+            else{
+<span class="nc" id="L65">                shipment.setStatus(ShipmentStatusEnum.DISCARDED);</span>
+            }
+
+<span class="fc" id="L68">            shipmentRepositoryPort.saveShipmentPlanification(shipment);</span>
+<span class="fc" id="L69">            timeMeter.stop();</span>
+<span class="fc" id="L70">            log.info(&quot;Route saved in {} ms&quot;, timeMeter.getTime());</span>
+<span class="fc" id="L71">            timeMeter.reset();</span>
+<span class="fc" id="L72">        });</span>
+<span class="fc" id="L73">    }</span>
+
+    private static Consumer&lt;RouteResult&gt; stopWatchMeter(StopWatch timeMeter) {
+<span class="fc" id="L76">        return result -&gt; {</span>
+
+<span class="fc" id="L78">            synchronized (timeMeter) {</span>
+<span class="fc" id="L79">                timeMeter.split();</span>
+<span class="fc" id="L80">                log.info(&quot;Route processed in {} ms&quot;, timeMeter.getSplitTime());</span>
+<span class="fc" id="L81">                timeMeter.unsplit();</span>
+<span class="fc" id="L82">            }</span>
+<span class="fc" id="L83">        };</span>
+    }
+
+    private static Function&lt;RouteResult, RouteResult&gt; algorthimResultLogger(Shipment shipment) {
+<span class="fc" id="L87">        return result -&gt; {</span>
+
+            // Print the shortest path costs
+<span class="pc bpc" id="L90" title="2 of 4 branches missed.">            if (log.isTraceEnabled() &amp;&amp; result != null) {</span>
+<span class="fc" id="L91">                log.trace(&quot;Time cost from [ {} &lt;-&gt; {} ] is {}&quot;, shipment.getOrigin().getName(), shipment.getDestination().getName(), result.cost());</span>
+<span class="fc" id="L92">                StringBuilder sb = new StringBuilder();</span>
+<span class="fc" id="L93">                sb.append(&quot;Path: &quot;).append(result.route().get(0).getOrigin().getName());</span>
+<span class="fc" id="L94">                result.route().forEach(r -&gt; sb.append(String.format(&quot; | (%s -&gt; [%s] -&gt; %s)&quot;, r.getOrigin().getName(), r.getTransportType(), r.getDestination().getName())));</span>
+<span class="fc" id="L95">                log.trace(sb.toString());</span>
+            }
+<span class="fc" id="L97">            return result;</span>
+        };
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

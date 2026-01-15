@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../jacoco-resources/report.gif" type="image/gif"/><title>GraphProcessor.java</title><link rel="stylesheet" href="../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../index.html" class="el_report">com.itxiop.transport:jacoco-report-aggregate</a> &gt; <a href="../index.html" class="el_bundle">hiring-challenge-application</a> &gt; <a href="index.source.html" class="el_package">com.itxiop.transport.domain.usecase</a> &gt; <span class="el_source">GraphProcessor.java</span></div><h1>GraphProcessor.java</h1><pre class="source lang-java linenums">package com.itxiop.transport.domain.usecase;
+
+import com.itxiop.transport.domain.entities.City;
+import com.itxiop.transport.domain.entities.Route;
+import com.itxiop.transport.domain.entities.Shipment;
+import com.itxiop.transport.domain.route.vo.RouteResult;
+import com.itxiop.transport.domain.vo.TransportTypeEnum;
+import lombok.extern.slf4j.Slf4j;
+
+import java.time.Duration;
+import java.util.*;
+
+<span class="fc" id="L13">@Slf4j</span>
+<span class="nc" id="L14">public class GraphProcessor {</span>
+
+<span class="fc" id="L16">    private record CityStop(City city, Duration cost, TransportTypeEnum transportTypeEnum) {}</span>
+    
+
+    public static RouteResult dijkstra(List&lt;Route&gt; routes, Shipment shipment) {
+        
+<span class="fc" id="L21">        Set&lt;City&gt; visited = new HashSet&lt;&gt;();</span>
+<span class="fc" id="L22">        Map&lt;City, CityStop&gt; shortestRoutes = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L23">        Map&lt;City, Map&lt;City, Route&gt;&gt; edges = new HashMap&lt;&gt;();</span>
+
+<span class="fc" id="L25">        log.trace(&quot;*** Evaluating dijkstra shortest path algorithm:&quot;);</span>
+
+        // Traverse routes to create a map used to find the route between any two connected cities.
+<span class="fc bfc" id="L28" title="All 2 branches covered.">        for (Route route : routes) {</span>
+<span class="fc" id="L29">            City origin = route.getOrigin();</span>
+<span class="fc" id="L30">            City destination = route.getDestination();</span>
+
+<span class="fc" id="L32">            edges.putIfAbsent(origin, new HashMap&lt;&gt;());</span>
+<span class="fc" id="L33">            edges.get(origin).put(destination, route);</span>
+
+<span class="fc" id="L35">            edges.putIfAbsent(destination, new HashMap&lt;&gt;());</span>
+<span class="fc" id="L36">            edges.get(destination).put(origin, route);</span>
+<span class="fc" id="L37">        }</span>
+        
+<span class="fc" id="L39">        Map&lt;City, City&gt; previous = new HashMap&lt;&gt;();</span>
+        
+        // Queue to keep in order the not yet visited cities with lower cost first starting with the origin city
+<span class="fc" id="L42">        PriorityQueue&lt;City&gt; queue = new PriorityQueue&lt;&gt;(Comparator.comparing(city -&gt; shortestRoutes.get(city).cost()));</span>
+<span class="fc" id="L43">        queue.add(shipment.getOrigin());</span>
+        
+        // Initial distance set to zero
+<span class="fc" id="L46">        shortestRoutes.put(shipment.getOrigin(), new CityStop(shipment.getOrigin(), Duration.ZERO, null));</span>
+        
+<span class="fc bfc" id="L48" title="All 2 branches covered.">        while (!queue.isEmpty()) {</span>
+            
+<span class="fc" id="L50">            City current = queue.poll();</span>
+<span class="fc bfc" id="L51" title="All 2 branches covered.">            if(visited.contains(current)){</span>
+<span class="fc" id="L52">                log.trace(&quot;Discarding node [{}] as it has already been visited&quot;, current.getName());</span>
+<span class="fc" id="L53">                continue;</span>
+            }
+<span class="fc" id="L55">            log.trace(&quot;Visiting node [{}]&quot;, current.getName());</span>
+                    
+            // For each neighbor of the current city
+<span class="fc bfc" id="L58" title="All 2 branches covered.">            for (Map.Entry&lt;City, Route&gt; edge : edges.getOrDefault(current, Collections.emptyMap()).entrySet()) {</span>
+<span class="fc" id="L59">                City neighbor = edge.getKey();</span>
+<span class="fc bfc" id="L60" title="All 2 branches covered.">                if(!visited.contains(neighbor)) {</span>
+<span class="fc" id="L61">                    Route route = edge.getValue();</span>
+<span class="fc" id="L62">                    CityStop tentativeRoute = new CityStop(neighbor, shortestRoutes.get(current).cost().plus(route.getCost()), route.getTransportType());</span>
+<span class="fc" id="L63">                    log.trace(&quot; &gt;&gt; neighbor: [{}] tentative cost: [{}] by {}&quot;, neighbor.getName(), tentativeRoute.cost(), tentativeRoute.transportTypeEnum);</span>
+<span class="fc bfc" id="L64" title="All 4 branches covered.">                    if (!shortestRoutes.containsKey(neighbor) || shortestRoutes.get(neighbor).cost().compareTo(tentativeRoute.cost()) &gt; 0) {</span>
+<span class="fc" id="L65">                        shortestRoutes.put(neighbor, tentativeRoute);</span>
+<span class="fc" id="L66">                        previous.put(neighbor, current);</span>
+<span class="fc" id="L67">                        queue.add(neighbor);</span>
+<span class="fc" id="L68">                        log.trace(&quot; &gt;&gt; [✔] tentative neighbor with a shorter route. Adding to path&quot;);</span>
+                    }
+                }
+<span class="fc" id="L71">            }</span>
+<span class="fc" id="L72">            log.trace(&quot; &gt;&gt; Marking node [{}] as visited&quot;, current.getName());</span>
+<span class="fc" id="L73">            visited.add(current);</span>
+<span class="fc" id="L74">        }</span>
+        
+<span class="fc" id="L76">        LinkedList&lt;Route&gt; path = new LinkedList&lt;&gt;();</span>
+<span class="fc" id="L77">        City currentCity = null;</span>
+<span class="fc" id="L78">        City prevCity = shipment.getDestination();</span>
+<span class="fc bfc" id="L79" title="All 2 branches covered.">        while(prevCity != shipment.getOrigin()){</span>
+<span class="fc" id="L80">            currentCity = prevCity;</span>
+<span class="fc" id="L81">            prevCity = previous.get(currentCity);</span>
+<span class="fc" id="L82">            Route route = edges.getOrDefault(prevCity, Collections.emptyMap()).get(currentCity);</span>
+<span class="pc bpc" id="L83" title="1 of 2 branches missed.">            if(route != null){</span>
+<span class="fc" id="L84">                path.addFirst(route);</span>
+            }
+            else{
+<span class="nc" id="L87">                log.trace(&quot;*** Evaluation finished without a valid route&quot;);</span>
+<span class="nc" id="L88">                return null;</span>
+            }
+<span class="fc" id="L90">        }</span>
+<span class="fc" id="L91">        log.trace(&quot;*** Evaluation finished with Path {}&quot;, path);</span>
+<span class="fc" id="L92">        return new RouteResult(path, shortestRoutes.get(shipment.getDestination()).cost());</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

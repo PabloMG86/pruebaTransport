@@ -1,0 +1,4 @@
+com\itxiop\transport\infrastructure\ShipmentServerRestTestIT.class
+com\itxiop\transport\ApplicationContextTest.class
+com\itxiop\transport\application\MultiTransportPendingShipmentsTest.class
+com\itxiop\transport\infrastructure\ShipmentH2RepositoryPortTest.class

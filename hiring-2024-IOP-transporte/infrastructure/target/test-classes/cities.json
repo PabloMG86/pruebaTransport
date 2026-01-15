@@ -1,0 +1,22 @@
+[
+  {
+    "code": "MAD",
+    "name": "Madrid",
+    "handlingCost": 1
+  },
+  {
+    "code": "PAR",
+    "name": "París",
+    "handlingCost": 3
+  },
+  {
+    "code": "LON",
+    "name": "Londres",
+    "handlingCost": 2
+  },
+  {
+    "code": "ROM",
+    "name": "Roma",
+    "handlingCost": 1
+  }
+]

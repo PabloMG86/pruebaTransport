@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../jacoco-resources/report.gif" type="image/gif"/><title>ShipmentH2RepositoryAdapter.java</title><link rel="stylesheet" href="../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../index.html" class="el_report">com.itxiop.transport:jacoco-report-aggregate</a> &gt; <a href="../index.html" class="el_bundle">hiring-challenge-infrastructure</a> &gt; <a href="index.source.html" class="el_package">com.itxiop.transport.infrastructure.repository.shipment</a> &gt; <span class="el_source">ShipmentH2RepositoryAdapter.java</span></div><h1>ShipmentH2RepositoryAdapter.java</h1><pre class="source lang-java linenums">package com.itxiop.transport.infrastructure.repository.shipment;
+
+import com.itxiop.transport.domain.city.repository.CityRepositoryPort;
+import com.itxiop.transport.domain.entities.Route;
+import com.itxiop.transport.domain.entities.Shipment;
+import com.itxiop.transport.domain.shipment.repository.ShipmentRepositoryPort;
+import com.itxiop.transport.domain.shipment.vo.ShipmentInput;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+
+/**
+ * &lt;p&gt; Implementation of {@link ShipmentRepositoryPort} with H2 database &lt;/p&gt;
+ */
+@Component
+<span class="fc" id="L21">@Slf4j</span>
+@RequiredArgsConstructor
+public class ShipmentH2RepositoryAdapter implements ShipmentRepositoryPort {
+  
+  // Memory handled routes
+  private Map&lt;UUID, List&lt;Route&gt;&gt; routes = new HashMap&lt;&gt;();
+
+  private final ShipmentH2Repository shipmentH2Repository;
+
+  private final CityRepositoryPort cityRepositoryPort;
+
+  private final ShipmentEntityMapper shipmentEntityMapper;
+  
+  public Shipment findShipmentById(UUID id) {
+
+<span class="fc" id="L36">    ShipmentEntity entity = shipmentH2Repository.findById(id).orElseThrow();</span>
+<span class="fc" id="L37">    Shipment shipment = shipmentEntityMapper.toDomainEntity(entity);</span>
+<span class="fc" id="L38">     log.info(&quot;Loading shipment with id: {}&quot;, shipment.getId());</span>
+
+    // TODO #2: Set routes in shipment looking at routes map
+    // TODO #2: Set origin and destination in shipment from cityRepository
+<span class="fc" id="L42">    return shipment;</span>
+  }
+
+  @Override
+  public void saveShipment(ShipmentInput shipment) {
+<span class="nc" id="L47">    log.trace(&quot;Saving shipment with id: {}&quot;, shipment.getId());</span>
+<span class="nc" id="L48">    shipmentH2Repository.save(shipmentEntityMapper.fromDomainVO(shipment));</span>
+    
+<span class="nc" id="L50">  }</span>
+
+  @Override
+  public void saveShipmentPlanification(Shipment shipment) {
+<span class="nc" id="L54">    log.trace(&quot;Saving shipment planification with id: {}&quot;, shipment.getId());</span>
+<span class="nc" id="L55">    shipmentH2Repository.save(shipmentEntityMapper.fromDomainEntity(shipment));</span>
+<span class="nc" id="L56">    routes.put(shipment.getId(), shipment.getRoutePlan());</span>
+<span class="nc" id="L57">  }</span>
+
+  @Override
+  public void deleteShipment(Shipment shipment) {
+<span class="nc" id="L61">    log.trace(&quot;Delete shipment with id: {}&quot;, shipment.getId());</span>
+<span class="nc" id="L62">    shipmentH2Repository.deleteById(shipment.getId());</span>
+<span class="nc" id="L63">  }</span>
+
+  @Override
+  public List&lt;Shipment&gt; findShipments() {
+<span class="nc" id="L67">    log.trace(&quot;Find all shipments&quot;);</span>
+
+<span class="nc" id="L69">    List&lt;ShipmentEntity&gt; entities = shipmentH2Repository.findAll();</span>
+
+<span class="nc" id="L71">      return entities.stream().map(entity -&gt; {</span>
+<span class="nc" id="L72">      Shipment shipment = shipmentEntityMapper.toDomainEntity(entity);</span>
+
+      // TODO #2: Set routes origin and destination
+<span class="nc" id="L75">      return shipment;</span>
+<span class="nc" id="L76">    }).toList();</span>
+  }
+
+  @Override
+  public void deleteProcessedShipments() {
+<span class="nc" id="L81">    log.trace(&quot;Delete all processed shipments&quot;);</span>
+    // TODO #4: Implemente deleted processed shipments
+<span class="nc" id="L83">  }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

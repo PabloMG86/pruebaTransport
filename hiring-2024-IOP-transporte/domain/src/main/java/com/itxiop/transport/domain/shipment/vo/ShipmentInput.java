@@ -16,5 +16,6 @@ public class ShipmentInput {
   OffsetDateTime expectedArrivalDate;
   City origin;
   City destination;
+  @Builder.Default
   ShipmentStatusEnum status = ShipmentStatusEnum.PENDING;
 }

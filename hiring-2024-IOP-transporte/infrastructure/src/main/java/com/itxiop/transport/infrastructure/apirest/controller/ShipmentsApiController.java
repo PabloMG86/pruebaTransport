@@ -48,8 +48,10 @@ public class ShipmentsApiController implements ShipmentsApi {
     return ResponseEntity.ok(shipments);
   }
 
-  public ResponseEntity<Void> loadShipment(Object shipmentInput) {
-    ShipmentInput domainVO = null; // TODO #1: MAP FROM SHIPMENTINPUT TO DOMAIN VO
+  @Override
+  public ResponseEntity<Void> loadShipment(
+      com.itxiop.transport.infrastructure.apirest.model.ShipmentInput shipmentInput) {
+    ShipmentInput domainVO = shipmentMapper.toDomainShipmentInput(shipmentInput);
     loadShipmentUseCase.loadShipment(domainVO);
     return ResponseEntity.ok().build();
   }

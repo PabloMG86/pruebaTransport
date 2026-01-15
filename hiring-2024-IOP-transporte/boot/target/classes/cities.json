@@ -1,0 +1,107 @@
+[
+  {
+    "code": "MAD",
+    "name": "Madrid (JSON)",
+    "handlingCost": 1
+  },
+  {
+    "code": "PAR",
+    "name": "París (JSON)",
+    "handlingCost": 5
+  },
+  {
+    "code": "LON",
+    "name": "Londres (JSON)",
+    "handlingCost": 6
+  },
+  {
+    "code": "ROM",
+    "name": "Roma (JSON)",
+    "handlingCost": 2
+  },
+  {
+    "code": "BER",
+    "name": "Berlin (JSON)",
+    "handlingCost": 5
+  },
+  {
+    "code": "WAR",
+    "name": "Warsaw (JSON)",
+    "handlingCost": 1
+  },
+  {
+    "code": "PRG",
+    "name": "Prague (JSON)",
+    "handlingCost": 1
+  },
+  {
+    "code": "VIE",
+    "name": "Vienna (JSON)",
+    "handlingCost": 2
+  },
+  {
+    "code": "BUD",
+    "name": "Budapest (JSON)",
+    "handlingCost": 1
+  },
+  {
+    "code": "BEL",
+    "name": "Belgrade (JSON)",
+    "handlingCost": 1
+  },
+  {
+    "code": "AMS",
+    "name": "Amsterdam (JSON)",
+    "handlingCost": 1
+  },
+  {
+    "code": "LIS",
+    "name": "Lisbon (JSON)",
+    "handlingCost": 1
+  },
+  {
+    "code": "REY",
+    "name": "Reykjavik (JSON)",
+    "handlingCost": 2
+  },
+  {
+    "code": "BCN",
+    "name": "Barcelona (JSON)",
+    "handlingCost": 1
+  },
+  {
+    "code": "SEV",
+    "name": "Sevilla (JSON)",
+    "handlingCost": 1
+  },
+  {
+    "code": "ZAR",
+    "name": "Zaragoza (JSON)",
+    "handlingCost": 1
+  },
+  {
+    "code": "VAL",
+    "name": "Valencia (JSON)",
+    "handlingCost": 1
+  },
+  {
+    "code": "MAL",
+    "name": "Málaga (JSON)",
+    "handlingCost": 1
+  },
+  {
+    "code": "MUR",
+    "name": "Murcia (JSON)",
+    "handlingCost": 1
+  },
+  {
+    "code": "BIL",
+    "name": "Bilbao (JSON)",
+    "handlingCost": 1
+  },
+  {
+    "code": "PAL",
+    "name": "Palencia (JSON)",
+    "handlingCost": 1
+  }
+]

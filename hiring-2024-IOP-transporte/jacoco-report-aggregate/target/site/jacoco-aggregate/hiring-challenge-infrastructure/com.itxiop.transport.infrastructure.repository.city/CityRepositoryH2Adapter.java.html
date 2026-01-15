@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../jacoco-resources/report.gif" type="image/gif"/><title>CityRepositoryH2Adapter.java</title><link rel="stylesheet" href="../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../index.html" class="el_report">com.itxiop.transport:jacoco-report-aggregate</a> &gt; <a href="../index.html" class="el_bundle">hiring-challenge-infrastructure</a> &gt; <a href="index.source.html" class="el_package">com.itxiop.transport.infrastructure.repository.city</a> &gt; <span class="el_source">CityRepositoryH2Adapter.java</span></div><h1>CityRepositoryH2Adapter.java</h1><pre class="source lang-java linenums">package com.itxiop.transport.infrastructure.repository.city;
+
+import com.itxiop.transport.domain.city.repository.CityRepositoryPort;
+import com.itxiop.transport.domain.entities.City;
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.NotImplementedException;
+import org.springframework.beans.factory.InitializingBean;
+
+@AllArgsConstructor
+<span class="nc" id="L11">@Slf4j</span>
+public class CityRepositoryH2Adapter implements CityRepositoryPort, InitializingBean {
+  
+      private final CityH2Repository cityH2Repository;
+      
+      private CityEntityMapper cityEntityMapper;
+
+      @Override
+      public City findByCityCode(String code) {
+            // TODO #5: Implement database search
+<span class="nc" id="L21">            throw new NotImplementedException(&quot;findByCode not implemented in H2 Port adapter. You may refer to CityRepositoryFileAdapter&quot; +</span>
+                    &quot; or is something missing here?&quot;);
+      }
+
+      @Override
+      public void afterPropertiesSet() throws Exception {
+<span class="nc" id="L27">            log.trace(&quot;CityRepositoryAdapter. H2 version initialized&quot;);</span>
+<span class="nc" id="L28">      }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

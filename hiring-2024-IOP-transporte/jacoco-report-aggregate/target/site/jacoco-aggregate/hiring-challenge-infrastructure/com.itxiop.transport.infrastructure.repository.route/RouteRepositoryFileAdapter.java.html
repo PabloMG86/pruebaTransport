@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../jacoco-resources/report.gif" type="image/gif"/><title>RouteRepositoryFileAdapter.java</title><link rel="stylesheet" href="../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../index.html" class="el_report">com.itxiop.transport:jacoco-report-aggregate</a> &gt; <a href="../index.html" class="el_bundle">hiring-challenge-infrastructure</a> &gt; <a href="index.source.html" class="el_package">com.itxiop.transport.infrastructure.repository.route</a> &gt; <span class="el_source">RouteRepositoryFileAdapter.java</span></div><h1>RouteRepositoryFileAdapter.java</h1><pre class="source lang-java linenums">package com.itxiop.transport.infrastructure.repository.route;
+
+import com.itxiop.transport.domain.city.repository.CityRepositoryPort;
+import com.itxiop.transport.domain.exceptions.CoreRuntimeException;
+import com.itxiop.transport.domain.exceptions.DomainException;
+import com.itxiop.transport.domain.entities.Route;
+import com.itxiop.transport.domain.exceptions.ResourceNotFoundException;
+import com.itxiop.transport.domain.route.repository.RouteRepositoryPort;
+import com.itxiop.transport.domain.vo.TransportTypeEnum;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.hibernate.validator.internal.util.DomainNameUtil;
+import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.stereotype.Component;
+
+import javax.management.InstanceNotFoundException;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.time.Duration;
+import java.time.temporal.ChronoUnit;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+<span class="fc" id="L30">@Slf4j</span>
+@Component
+@RequiredArgsConstructor
+public class RouteRepositoryFileAdapter implements RouteRepositoryPort, InitializingBean {
+
+  @Value(&quot;${graph.folder}&quot;)
+  private String graphFolder;
+
+  private final CityRepositoryPort cityRepositoryPort;
+
+  private final Map&lt;TransportTypeEnum, List&lt;Route&gt;&gt; routeBook = new HashMap&lt;&gt;();
+
+  @Override
+  public void afterPropertiesSet() throws Exception {
+<span class="fc" id="L44">    readAllGraphs(graphFolder);</span>
+<span class="fc" id="L45">  }</span>
+
+  private void readAllGraphs(String folderPath) throws IOException {
+
+<span class="fc" id="L49">    log.trace(&quot;Loading graph folder: [{}]&quot;, folderPath);</span>
+<span class="fc" id="L50">    try (Stream&lt;Path&gt; paths = Files.walk(new ClassPathResource(folderPath).getFile().toPath())) {</span>
+<span class="fc" id="L51">      paths.filter(Files::isRegularFile)</span>
+<span class="fc" id="L52">          .forEach(file -&gt; {</span>
+            try {
+<span class="fc" id="L54">              Optional&lt;TransportTypeEnum&gt; candidateTransportType = Arrays.stream(TransportTypeEnum.values())</span>
+<span class="fc" id="L55">                  .filter(f -&gt; f.name().equalsIgnoreCase(file.getFileName().toString().replace(&quot;.graph&quot;, &quot;&quot;))).findFirst();</span>
+<span class="pc bpc" id="L56" title="1 of 2 branches missed.">              if (candidateTransportType.isPresent()) {</span>
+<span class="fc" id="L57">                readGraph(candidateTransportType.get(), file);</span>
+              }
+<span class="nc" id="L59">            } catch (IOException e) {</span>
+<span class="nc" id="L60">              throw new CoreRuntimeException(&quot;Error reading file: &quot; + file, e);</span>
+<span class="nc" id="L61">            } catch (ResourceNotFoundException e) {</span>
+<span class="nc" id="L62">                throw new CoreRuntimeException(&quot;Graph file references missing resources&quot;, e);</span>
+<span class="fc" id="L63">            }</span>
+<span class="fc" id="L64">          });</span>
+    }
+<span class="fc" id="L66">  }</span>
+
+  private void readGraph(TransportTypeEnum transportTypeEnum, Path filePath) throws IOException, ResourceNotFoundException {
+
+<span class="fc" id="L70">    List&lt;Route&gt; routeList = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L71">    routeBook.put(transportTypeEnum, routeList);</span>
+<span class="fc" id="L72">    try (BufferedReader reader = new BufferedReader(new FileReader(filePath.toFile()))) {</span>
+      String line;
+<span class="fc bfc" id="L74" title="All 2 branches covered.">      while ((line = reader.readLine()) != null) {</span>
+<span class="fc" id="L75">        String[] parts = line.split(&quot;,&quot;);</span>
+<span class="fc" id="L76">        String origin = parts[0];</span>
+<span class="fc" id="L77">        String destination = parts[1];</span>
+<span class="fc" id="L78">        Duration cost = Duration.of(Long.parseLong(parts[2]), ChronoUnit.HOURS);</span>
+<span class="fc" id="L79">        routeList.add(</span>
+<span class="fc" id="L80">            Route.of(UUID.randomUUID(), cityRepositoryPort.findByCityCode(origin), cityRepositoryPort.findByCityCode(destination), transportTypeEnum, cost));</span>
+<span class="fc" id="L81">      }</span>
+    }
+<span class="fc" id="L83">  }</span>
+
+  @Override
+  public Map&lt;TransportTypeEnum, List&lt;Route&gt;&gt; findAvailableRoutes(List&lt;TransportTypeEnum&gt; transportTypeFilter) {
+<span class="fc" id="L87">    return routeBook.entrySet().stream().filter(entry -&gt; transportTypeFilter.contains(entry.getKey()))</span>
+<span class="fc" id="L88">        .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));</span>
+  }
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

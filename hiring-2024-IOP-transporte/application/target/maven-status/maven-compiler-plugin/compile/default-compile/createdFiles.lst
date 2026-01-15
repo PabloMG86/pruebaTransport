@@ -1,0 +1,7 @@
+com\itxiop\transport\domain\usecase\GraphProcessor$CityStop.class
+com\itxiop\transport\domain\usecase\LoadShipmentUseCaseImpl.class
+com\itxiop\transport\domain\usecase\FindShipmentsUseCaseImpl.class
+com\itxiop\transport\domain\usecase\FindShipmentUseCaseImpl.class
+com\itxiop\transport\domain\usecase\GraphProcessor.class
+com\itxiop\transport\domain\usecase\ProcessPendingShipmentsUseCaseImpl.class
+com\itxiop\transport\domain\usecase\PurgeShipmentUseCaseImpl.class
