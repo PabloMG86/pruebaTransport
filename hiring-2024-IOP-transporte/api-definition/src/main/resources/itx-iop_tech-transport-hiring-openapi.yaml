@@ -1,0 +1,135 @@
+openapi: 3.0.3
+info:
+  title: ITX IOP TRANSPORT hiring sample API
+  description: |-
+    ITX IOP TRANSPORT hiring sample API
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+    description: Local server
+tags:
+  - name: Shipments
+    description: Shipment operation endpoints
+paths:
+  /shipments:
+    # TODO #2: ADD GET LIST METHOD
+    delete:
+      tags:
+        - Shipments
+      summary: Endpoint to purge shipments just processed (status DISCARDED or PLANNED)
+      description: |-
+        Endpoint to purge shipments just processed (status DISCARDED or PLANNED). PENDING shipments will not be deleted
+      operationId: purgeShipments
+      responses:
+        '200':
+          description: Successful operation
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /shipments/process:
+    post:
+      tags:
+        - Shipments
+      summary: Endpoint to process pending shipments
+      description: |-
+        Dijkstra algorithm to process pending shipments and calculate the best route
+      operationId: processPendingShipments
+      responses:
+        '200':
+          description: Successful operation
+  /shipment/_shipmentId_param_:
+    get:
+      tags:
+        - Shipments
+      summary: Get global information about a concrete shipment
+      description: |-
+        Retrieve information related to a shipment using the shipment identifier
+        Collects data about the truck details, location stops and loaded packages
+      operationId: getShipment
+      # TODO #2: COMPLETE INPUT MODEL
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Shipment'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Shipment'
+            text/csv:
+              schema:
+                type: string
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  responses:
+    NotFound:
+      description: The specified resource was not found
+  schemas:
+    ShipmentInput:
+      type: object
+      # TODO #1: ADD SHIPMENT INPUT SCHEMA
+    Shipment:
+      type: object
+      # TODO #2: ADD SHIPMENT SCHEMAs
+    City:
+      type: object
+      properties:
+          code: 
+            type: string
+            description: City identifier (3-char unique udentifier)
+            minLength: 3
+            maxLength: 3
+            example: MAD
+          name: 
+            type: string
+            description: City full name
+            minLength: 1
+            maxLength: 9999
+            example: Madrid
+          handlingCost:
+            type: number
+            format: double
+            description: Handling cost
+            example: 10.0
+      required:
+          - code
+          - name
+    Route:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Shipment identifier (UUID)
+          format: uuid
+          example: 123e4567-e89b-12d3-a456-426614174000
+        origin:
+          $ref: '#/components/schemas/City'
+        destination:
+          $ref: '#/components/schemas/City'
+        transportType:
+          enum: [TRUCK, TRAIN, SEA, AIR]
+          description: Transport type
+          example: TRUCK
+        cost:
+          type: string
+          format: dur-time
+          description: Route time Cost (duration in hours)
+          example: T12H
+        handlingCost:
+          type: number
+          format: double
+          description: Handling cost
+          example: 10.0
+      required:
+        - code
+        - name
+    Error:
+      type: object
+      properties:
+        info:
+          type: string
+          description: Info about the error
+          example: [invalid operation service not ready]
+      required: 
+        - info
