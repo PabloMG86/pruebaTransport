@@ -22,7 +22,7 @@ import jakarta.annotation.Generated;
  */
 
 @Schema(name = "ShipmentInput", description = "Payload used to ingest a shipment")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-01-15T20:59:35.468793900+01:00[Europe/Madrid]", comments = "Generator version: 7.18.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-01-16T08:56:22.982580100+01:00[Europe/Madrid]", comments = "Generator version: 7.18.0")
 public class ShipmentInput {
 
   private UUID shipmentId;

@@ -35,16 +35,17 @@ public class ShipmentsApiController implements ShipmentsApi {
   private RestShipmentMapper shipmentMapper;
 
   @Override
-  public ResponseEntity<Object> getShipment(/* TODO #2: UUID shipmentId*/) {
-    UUID shipmentId = null;
+  public ResponseEntity<com.itxiop.transport.infrastructure.apirest.model.Shipment> getShipment(UUID shipmentId) {
     Shipment domainShipment = findShipmentUseCase.findShipmentById(shipmentId);
-    Object shipment = null; // TODO #2: MAP DOMAIN TO API SHIPMENT
+    com.itxiop.transport.infrastructure.apirest.model.Shipment shipment = shipmentMapper.toRestShipment(domainShipment);
     return ResponseEntity.ok(shipment);
   }
 
-  public ResponseEntity<List<Object>> getShipments() {
+  @Override
+  public ResponseEntity<List<com.itxiop.transport.infrastructure.apirest.model.Shipment>> getShipments() {
     List<Shipment> domainShipments = findShipmentsUseCase.findShipments();
-    List<Object> shipments = null; // TODO #2: MAP DOMAIN TO API SHIPMENTS
+    List<com.itxiop.transport.infrastructure.apirest.model.Shipment> shipments =
+        shipmentMapper.toRestShipments(domainShipments);
     return ResponseEntity.ok(shipments);
   }
 

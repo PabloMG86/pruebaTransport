@@ -37,8 +37,9 @@ public class ShipmentH2RepositoryAdapter implements ShipmentRepositoryPort {
     Shipment shipment = shipmentEntityMapper.toDomainEntity(entity);
      log.info("Loading shipment with id: {}", shipment.getId());
 
-    // TODO #2: Set routes in shipment looking at routes map
-    // TODO #2: Set origin and destination in shipment from cityRepository
+    shipment.setRoutePlan(routes.getOrDefault(shipment.getId(), List.of()));
+    shipment.setOrigin(cityRepositoryPort.findByCityCode(entity.getOriginCode()));
+    shipment.setDestination(cityRepositoryPort.findByCityCode(entity.getDestinationCode()));
     return shipment;
   }
 
@@ -71,7 +72,9 @@ public class ShipmentH2RepositoryAdapter implements ShipmentRepositoryPort {
       return entities.stream().map(entity -> {
       Shipment shipment = shipmentEntityMapper.toDomainEntity(entity);
 
-      // TODO #2: Set routes origin and destination
+      shipment.setRoutePlan(routes.getOrDefault(shipment.getId(), List.of()));
+      shipment.setOrigin(cityRepositoryPort.findByCityCode(entity.getOriginCode()));
+      shipment.setDestination(cityRepositoryPort.findByCityCode(entity.getDestinationCode()));
       return shipment;
     }).toList();
   }

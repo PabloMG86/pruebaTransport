@@ -1,4 +1,3 @@
-.openapi-generator-ignore
 README.md
 pom.xml
 src/gen/java/main/com/itxiop/transport/infrastructure/apirest/ApiUtil.java
@@ -6,4 +5,5 @@ src/gen/java/main/com/itxiop/transport/infrastructure/apirest/ShipmentsApi.java
 src/gen/java/main/com/itxiop/transport/infrastructure/apirest/model/City.java
 src/gen/java/main/com/itxiop/transport/infrastructure/apirest/model/Error.java
 src/gen/java/main/com/itxiop/transport/infrastructure/apirest/model/Route.java
+src/gen/java/main/com/itxiop/transport/infrastructure/apirest/model/Shipment.java
 src/gen/java/main/com/itxiop/transport/infrastructure/apirest/model/ShipmentInput.java

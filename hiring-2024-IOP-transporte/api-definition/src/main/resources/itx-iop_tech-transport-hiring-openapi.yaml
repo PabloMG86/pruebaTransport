@@ -30,7 +30,23 @@ paths:
         '400':
           description: Invalid request
   /shipments:
-    # TODO #2: ADD GET LIST METHOD
+    get:
+      tags:
+        - Shipments
+      summary: Get list of current shipments
+      description: Retrieve all shipments with their routing information if available
+      operationId: getShipments
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Shipment'
+        '404':
+          $ref: '#/components/responses/NotFound'
     delete:
       tags:
         - Shipments
@@ -54,7 +70,7 @@ paths:
       responses:
         '200':
           description: Successful operation
-  /shipment/_shipmentId_param_:
+  /shipment/{shipmentId}:
     get:
       tags:
         - Shipments
@@ -63,7 +79,14 @@ paths:
         Retrieve information related to a shipment using the shipment identifier
         Collects data about the truck details, location stops and loaded packages
       operationId: getShipment
-      # TODO #2: COMPLETE INPUT MODEL
+      parameters:
+        - in: path
+          name: shipmentId
+          required: true
+          schema:
+            type: string
+            format: uuid
+          description: Shipment identifier (UUID)
       responses:
         '200':
           description: Successful operation
@@ -121,7 +144,38 @@ components:
         - destinationCityCode
     Shipment:
       type: object
-      # TODO #2: ADD SHIPMENT SCHEMAs
+      description: Shipment aggregated information
+      properties:
+        shipmentId:
+          type: string
+          format: uuid
+          description: Shipment identifier (UUID)
+        originCity:
+          $ref: '#/components/schemas/City'
+        destinationCity:
+          $ref: '#/components/schemas/City'
+        departureDate:
+          type: string
+          format: date-time
+          description: Departure date
+        expectedArrivalDate:
+          type: string
+          format: date-time
+          description: Expected arrival date
+        status:
+          type: string
+          enum: [PENDING, DISCARDED, PLANNED]
+          description: Shipment status
+        routePlan:
+          type: array
+          items:
+            $ref: '#/components/schemas/Route'
+          description: Planned route for the shipment
+      required:
+        - shipmentId
+        - originCity
+        - destinationCity
+        - status
     City:
       type: object
       properties:

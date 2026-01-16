@@ -5,7 +5,9 @@
  */
 package com.itxiop.transport.infrastructure.apirest;
 
+import com.itxiop.transport.infrastructure.apirest.model.Shipment;
 import com.itxiop.transport.infrastructure.apirest.model.ShipmentInput;
+import java.util.UUID;
 import io.swagger.v3.oas.annotations.ExternalDocumentation;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -30,16 +32,17 @@ import java.util.Map;
 import java.util.Optional;
 import jakarta.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-01-15T20:59:35.468793900+01:00[Europe/Madrid]", comments = "Generator version: 7.18.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-01-16T08:56:22.982580100+01:00[Europe/Madrid]", comments = "Generator version: 7.18.0")
 @Validated
 @Tag(name = "Shipments", description = "Shipment operation endpoints")
 public interface ShipmentsApi {
 
-    String PATH_GET_SHIPMENT = "/shipment/_shipmentId_param_";
+    String PATH_GET_SHIPMENT = "/shipment/{shipmentId}";
     /**
-     * GET /shipment/_shipmentId_param_ : Get global information about a concrete shipment
+     * GET /shipment/{shipmentId} : Get global information about a concrete shipment
      * Retrieve information related to a shipment using the shipment identifier Collects data about the truck details, location stops and loaded packages
      *
+     * @param shipmentId Shipment identifier (UUID) (required)
      * @return Successful operation (status code 200)
      *         or The specified resource was not found (status code 404)
      */
@@ -50,9 +53,9 @@ public interface ShipmentsApi {
         tags = { "Shipments" },
         responses = {
             @ApiResponse(responseCode = "200", description = "Successful operation", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = Object.class)),
-                @Content(mediaType = "application/xml", schema = @Schema(implementation = Object.class)),
-                @Content(mediaType = "text/csv", schema = @Schema(implementation = Object.class))
+                @Content(mediaType = "application/json", schema = @Schema(implementation = Shipment.class)),
+                @Content(mediaType = "application/xml", schema = @Schema(implementation = Shipment.class)),
+                @Content(mediaType = "text/csv", schema = @Schema(implementation = Shipment.class))
             }),
             @ApiResponse(responseCode = "404", description = "The specified resource was not found")
         }
@@ -62,7 +65,37 @@ public interface ShipmentsApi {
         value = ShipmentsApi.PATH_GET_SHIPMENT,
         produces = { "application/json", "application/xml", "text/csv" }
     )
-    ResponseEntity<Object> getShipment(
+    ResponseEntity<Shipment> getShipment(
+        @NotNull @Parameter(name = "shipmentId", description = "Shipment identifier (UUID)", required = true, in = ParameterIn.PATH) @PathVariable("shipmentId") UUID shipmentId
+    );
+
+
+    String PATH_GET_SHIPMENTS = "/shipments";
+    /**
+     * GET /shipments : Get list of current shipments
+     * Retrieve all shipments with their routing information if available
+     *
+     * @return Successful operation (status code 200)
+     *         or The specified resource was not found (status code 404)
+     */
+    @Operation(
+        operationId = "getShipments",
+        summary = "Get list of current shipments",
+        description = "Retrieve all shipments with their routing information if available",
+        tags = { "Shipments" },
+        responses = {
+            @ApiResponse(responseCode = "200", description = "Successful operation", content = {
+                @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = Shipment.class)))
+            }),
+            @ApiResponse(responseCode = "404", description = "The specified resource was not found")
+        }
+    )
+    @RequestMapping(
+        method = RequestMethod.GET,
+        value = ShipmentsApi.PATH_GET_SHIPMENTS,
+        produces = { "application/json" }
+    )
+    ResponseEntity<List<Shipment>> getShipments(
         
     );
 

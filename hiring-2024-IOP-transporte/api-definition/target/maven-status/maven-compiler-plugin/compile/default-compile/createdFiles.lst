@@ -1,7 +1,0 @@
-com\itxiop\transport\infrastructure\apirest\ApiUtil.class
-com\itxiop\transport\infrastructure\apirest\model\Route.class
-com\itxiop\transport\infrastructure\apirest\model\City.class
-com\itxiop\transport\infrastructure\apirest\model\ShipmentInput.class
-com\itxiop\transport\infrastructure\apirest\model\Route$TransportTypeEnum.class
-com\itxiop\transport\infrastructure\apirest\ShipmentsApi.class
-com\itxiop\transport\infrastructure\apirest\model\Error.class
