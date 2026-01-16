@@ -35,32 +35,33 @@ public class ShipmentsApiController implements ShipmentsApi {
   private RestShipmentMapper shipmentMapper;
 
   @Override
-  public ResponseEntity&lt;Object&gt; getShipment(/* TODO #2: UUID shipmentId*/) {
-<span class="nc" id="L39">    UUID shipmentId = null;</span>
-<span class="nc" id="L40">    Shipment domainShipment = findShipmentUseCase.findShipmentById(shipmentId);</span>
-<span class="nc" id="L41">    Object shipment = null; // TODO #2: MAP DOMAIN TO API SHIPMENT</span>
-<span class="nc" id="L42">    return ResponseEntity.ok(shipment);</span>
+  public ResponseEntity&lt;com.itxiop.transport.infrastructure.apirest.model.Shipment&gt; getShipment(UUID shipmentId) {
+<span class="fc" id="L39">    Shipment domainShipment = findShipmentUseCase.findShipmentById(shipmentId);</span>
+<span class="fc" id="L40">    com.itxiop.transport.infrastructure.apirest.model.Shipment shipment = shipmentMapper.toRestShipment(domainShipment);</span>
+<span class="fc" id="L41">    return ResponseEntity.ok(shipment);</span>
   }
 
-  public ResponseEntity&lt;List&lt;Object&gt;&gt; getShipments() {
-<span class="nc" id="L46">    List&lt;Shipment&gt; domainShipments = findShipmentsUseCase.findShipments();</span>
-<span class="nc" id="L47">    List&lt;Object&gt; shipments = null; // TODO #2: MAP DOMAIN TO API SHIPMENTS</span>
-<span class="nc" id="L48">    return ResponseEntity.ok(shipments);</span>
+  @Override
+  public ResponseEntity&lt;List&lt;com.itxiop.transport.infrastructure.apirest.model.Shipment&gt;&gt; getShipments() {
+<span class="fc" id="L46">    List&lt;Shipment&gt; domainShipments = findShipmentsUseCase.findShipments();</span>
+<span class="fc" id="L47">    List&lt;com.itxiop.transport.infrastructure.apirest.model.Shipment&gt; shipments =</span>
+<span class="fc" id="L48">        shipmentMapper.toRestShipments(domainShipments);</span>
+<span class="fc" id="L49">    return ResponseEntity.ok(shipments);</span>
   }
 
   @Override
   public ResponseEntity&lt;Void&gt; loadShipment(
       com.itxiop.transport.infrastructure.apirest.model.ShipmentInput shipmentInput) {
-<span class="fc" id="L54">    ShipmentInput domainVO = shipmentMapper.toDomainShipmentInput(shipmentInput);</span>
-<span class="fc" id="L55">    loadShipmentUseCase.loadShipment(domainVO);</span>
-<span class="fc" id="L56">    return ResponseEntity.ok().build();</span>
+<span class="fc" id="L55">    ShipmentInput domainVO = shipmentMapper.toDomainShipmentInput(shipmentInput);</span>
+<span class="fc" id="L56">    loadShipmentUseCase.loadShipment(domainVO);</span>
+<span class="fc" id="L57">    return ResponseEntity.ok().build();</span>
   }
 
   @Override
   public ResponseEntity&lt;Void&gt; purgeShipments(){
 
-<span class="nc" id="L62">    purgeShipmentUseCase.purgePlannedShipments();</span>
-<span class="nc" id="L63">    return ResponseEntity.ok().build();</span>
+<span class="nc" id="L63">    purgeShipmentUseCase.purgePlannedShipments();</span>
+<span class="nc" id="L64">    return ResponseEntity.ok().build();</span>
   }
 
 
@@ -68,8 +69,8 @@ public class ShipmentsApiController implements ShipmentsApi {
   @Override
   public ResponseEntity&lt;Void&gt; processPendingShipments(){
 
-<span class="nc" id="L71">    processPendingShipmentsUseCase.processPendingShipments();</span>
-<span class="nc" id="L72">    return ResponseEntity.ok().build();</span>
+<span class="nc" id="L72">    processPendingShipmentsUseCase.processPendingShipments();</span>
+<span class="nc" id="L73">    return ResponseEntity.ok().build();</span>
   }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

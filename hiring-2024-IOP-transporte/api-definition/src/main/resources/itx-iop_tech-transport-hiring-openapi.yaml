@@ -121,13 +121,13 @@ components:
           minLength: 3
           maxLength: 3
           description: Origin city identifier (3-char unique identifier)
-          example: SVQ
+          example: BER
         destinationCityCode:
           type: string
           minLength: 3
           maxLength: 3
           description: Destination city identifier (3-char unique identifier)
-          example: MAD
+          example: REY
         departureDate:
           type: string
           format: date-time

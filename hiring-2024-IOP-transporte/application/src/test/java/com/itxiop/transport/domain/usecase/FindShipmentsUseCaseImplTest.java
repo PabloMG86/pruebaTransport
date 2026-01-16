@@ -10,7 +10,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -34,7 +35,7 @@ class FindShipmentsUseCaseImplTest {
 
         List<Shipment> result = useCase.findShipments();
 
-        assertThat(result).isEqualTo(expected);
+        assertThat(result, equalTo(expected));
         verify(shipmentRepositoryPort).findShipments();
     }
 }

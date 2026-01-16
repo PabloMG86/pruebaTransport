@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.itxiop.transport.domain.usecase.ProcessPendingShipmentsUseCaseImplTest" time="0.125" tests="2" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.itxiop.transport.domain.usecase.ProcessPendingShipmentsUseCaseImplTest" time="0.114" tests="2" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="17"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -15,7 +15,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="ES"/>
     <property name="sun.boot.library.path" value="C:\Users\pablo.miguelgarcia\.jdks\ms-17.0.17\bin"/>
-    <property name="sun.java.command" value="C:\Users\pablo.miguelgarcia\AppData\Local\Temp\surefire4592132019079425384\surefirebooter-20260115205928462_3.jar C:\Users\pablo.miguelgarcia\AppData\Local\Temp\surefire4592132019079425384 2026-01-15T20-59-25_710-jvmRun1 surefire-20260115205928462_1tmp surefire_0-20260115205928462_2tmp"/>
+    <property name="sun.java.command" value="C:\Users\pablo.miguelgarcia\AppData\Local\Temp\surefire13928809340852348022\surefirebooter-20260116114520249_3.jar C:\Users\pablo.miguelgarcia\AppData\Local\Temp\surefire13928809340852348022 2026-01-16T11-45-17_859-jvmRun1 surefire-20260116114520249_1tmp surefire_0-20260116114520249_2tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="C:\Desarrollo\DISDEP_RUPER\pruebaTransport\hiring-2024-IOP-transporte\application\target\test-classes;C:\Desarrollo\DISDEP_RUPER\pruebaTransport\hiring-2024-IOP-transporte\application\target\classes;C:\Desarrollo\DISDEP_RUPER\pruebaTransport\hiring-2024-IOP-transporte\domain\target\hiring-challenge-domain-0.1.0-SNAPSHOT.jar;C:\Desarrollo\repo-maven\org\slf4j\slf4j-api\2.0.12\slf4j-api-2.0.12.jar;C:\Desarrollo\repo-maven\org\apache\commons\commons-lang3\3.13.0\commons-lang3-3.13.0.jar;C:\Desarrollo\repo-maven\org\instancio\instancio-junit\4.5.0\instancio-junit-4.5.0.jar;C:\Desarrollo\repo-maven\org\instancio\instancio-core\4.5.0\instancio-core-4.5.0.jar;C:\Desarrollo\repo-maven\org\junit\jupiter\junit-jupiter-engine\5.10.2\junit-jupiter-engine-5.10.2.jar;C:\Desarrollo\repo-maven\org\junit\platform\junit-platform-engine\1.10.2\junit-platform-engine-1.10.2.jar;C:\Desarrollo\repo-maven\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Desarrollo\repo-maven\org\junit\platform\junit-platform-commons\1.10.2\junit-platform-commons-1.10.2.jar;C:\Desarrollo\repo-maven\org\junit\jupiter\junit-jupiter-api\5.10.2\junit-jupiter-api-5.10.2.jar;C:\Desarrollo\repo-maven\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Desarrollo\repo-maven\org\mockito\mockito-core\5.7.0\mockito-core-5.7.0.jar;C:\Desarrollo\repo-maven\net\bytebuddy\byte-buddy\1.14.12\byte-buddy-1.14.12.jar;C:\Desarrollo\repo-maven\net\bytebuddy\byte-buddy-agent\1.14.12\byte-buddy-agent-1.14.12.jar;C:\Desarrollo\repo-maven\org\objenesis\objenesis\3.3\objenesis-3.3.jar;C:\Desarrollo\repo-maven\org\mockito\mockito-junit-jupiter\5.7.0\mockito-junit-jupiter-5.7.0.jar;C:\Desarrollo\repo-maven\org\hamcrest\hamcrest\2.2\hamcrest-2.2.jar;C:\Desarrollo\repo-maven\ch\qos\logback\logback-classic\1.4.14\logback-classic-1.4.14.jar;C:\Desarrollo\repo-maven\ch\qos\logback\logback-core\1.4.14\logback-core-1.4.14.jar;C:\Desarrollo\repo-maven\org\projectlombok\lombok\1.18.30\lombok-1.18.30.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -30,7 +30,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="C:\Users\pablo.miguelgarcia\AppData\Local\Temp\surefire4592132019079425384\surefirebooter-20260115205928462_3.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\pablo.miguelgarcia\AppData\Local\Temp\surefire13928809340852348022\surefirebooter-20260116114520249_3.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="17.0.17+10-LTS"/>
@@ -59,99 +59,99 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="61.0"/>
   </properties>
-  <testcase name="dijkstraComplexScenarioTest" classname="com.itxiop.transport.domain.usecase.ProcessPendingShipmentsUseCaseImplTest" time="0.113">
-    <system-out><![CDATA[20:59:32.744 [main] INFO  c.i.t.d.u.ProcessPendingShipmentsUseCaseImpl -- Processing shipment: Shipment(id=818a26b9-86e9-4b0b-bdb0-fefed1df1a81, departureDate=2024-01-01T09:00Z, expectedArrivalDate=2024-01-02T09:00Z, origin=City(code=c42d3d74-9a0c-4d5c-9820-cfefdec61e27, name=A, handlingCost=0), destination=City(code=9fcc3be6-ed96-4d50-a061-1c423775f700, name=E, handlingCost=0), status=PENDING, routePlan=null)
-20:59:32.762 [main] INFO  c.i.t.d.u.ProcessPendingShipmentsUseCaseImpl -- Processing route: TRUCK
-20:59:32.764 [main] TRACE c.i.t.domain.usecase.GraphProcessor -- *** Evaluating dijkstra shortest path algorithm:
-20:59:32.768 [main] TRACE c.i.t.domain.usecase.GraphProcessor -- Visiting node [A]
-20:59:32.768 [main] TRACE c.i.t.domain.usecase.GraphProcessor --  >> neighbor: [B] tentative cost: [PT4H] by TRUCK
-20:59:32.768 [main] TRACE c.i.t.domain.usecase.GraphProcessor --  >> [?] tentative neighbor with a shorter route. Adding to path
-20:59:32.768 [main] TRACE c.i.t.domain.usecase.GraphProcessor --  >> neighbor: [H] tentative cost: [PT8H] by TRUCK
-20:59:32.769 [main] TRACE c.i.t.domain.usecase.GraphProcessor --  >> [?] tentative neighbor with a shorter route. Adding to path
-20:59:32.769 [main] TRACE c.i.t.domain.usecase.GraphProcessor --  >> Marking node [A] as visited
-20:59:32.769 [main] TRACE c.i.t.domain.usecase.GraphProcessor -- Visiting node [B]
-20:59:32.769 [main] TRACE c.i.t.domain.usecase.GraphProcessor --  >> neighbor: [C] tentative cost: [PT12H] by TRUCK
-20:59:32.769 [main] TRACE c.i.t.domain.usecase.GraphProcessor --  >> [?] tentative neighbor with a shorter route. Adding to path
-20:59:32.769 [main] TRACE c.i.t.domain.usecase.GraphProcessor --  >> neighbor: [H] tentative cost: [PT15H] by TRUCK
-20:59:32.769 [main] TRACE c.i.t.domain.usecase.GraphProcessor --  >> Marking node [B] as visited
-20:59:32.769 [main] TRACE c.i.t.domain.usecase.GraphProcessor -- Visiting node [H]
-20:59:32.769 [main] TRACE c.i.t.domain.usecase.GraphProcessor --  >> neighbor: [I] tentative cost: [PT15H] by TRUCK
-20:59:32.769 [main] TRACE c.i.t.domain.usecase.GraphProcessor --  >> [?] tentative neighbor with a shorter route. Adding to path
-20:59:32.769 [main] TRACE c.i.t.domain.usecase.GraphProcessor --  >> neighbor: [G] tentative cost: [PT9H] by TRUCK
-20:59:32.769 [main] TRACE c.i.t.domain.usecase.GraphProcessor --  >> [?] tentative neighbor with a shorter route. Adding to path
-20:59:32.769 [main] TRACE c.i.t.domain.usecase.GraphProcessor --  >> Marking node [H] as visited
-20:59:32.769 [main] TRACE c.i.t.domain.usecase.GraphProcessor -- Visiting node [G]
-20:59:32.769 [main] TRACE c.i.t.domain.usecase.GraphProcessor --  >> neighbor: [F] tentative cost: [PT11H] by TRUCK
-20:59:32.770 [main] TRACE c.i.t.domain.usecase.GraphProcessor --  >> [?] tentative neighbor with a shorter route. Adding to path
-20:59:32.770 [main] TRACE c.i.t.domain.usecase.GraphProcessor --  >> neighbor: [I] tentative cost: [PT11H] by TRUCK
-20:59:32.770 [main] TRACE c.i.t.domain.usecase.GraphProcessor --  >> [?] tentative neighbor with a shorter route. Adding to path
-20:59:32.770 [main] TRACE c.i.t.domain.usecase.GraphProcessor --  >> Marking node [G] as visited
-20:59:32.770 [main] TRACE c.i.t.domain.usecase.GraphProcessor -- Visiting node [F]
-20:59:32.770 [main] TRACE c.i.t.domain.usecase.GraphProcessor --  >> neighbor: [D] tentative cost: [PT25H] by TRUCK
-20:59:32.770 [main] TRACE c.i.t.domain.usecase.GraphProcessor --  >> [?] tentative neighbor with a shorter route. Adding to path
-20:59:32.770 [main] TRACE c.i.t.domain.usecase.GraphProcessor --  >> neighbor: [C] tentative cost: [PT15H] by TRUCK
-20:59:32.771 [main] TRACE c.i.t.domain.usecase.GraphProcessor --  >> neighbor: [E] tentative cost: [PT21H] by TRUCK
-20:59:32.771 [main] TRACE c.i.t.domain.usecase.GraphProcessor --  >> [?] tentative neighbor with a shorter route. Adding to path
-20:59:32.771 [main] TRACE c.i.t.domain.usecase.GraphProcessor --  >> Marking node [F] as visited
-20:59:32.771 [main] TRACE c.i.t.domain.usecase.GraphProcessor -- Visiting node [I]
-20:59:32.771 [main] TRACE c.i.t.domain.usecase.GraphProcessor --  >> neighbor: [C] tentative cost: [PT13H] by TRUCK
-20:59:32.771 [main] TRACE c.i.t.domain.usecase.GraphProcessor --  >> Marking node [I] as visited
-20:59:32.771 [main] TRACE c.i.t.domain.usecase.GraphProcessor -- Discarding node [I] as it has already been visited
-20:59:32.771 [main] TRACE c.i.t.domain.usecase.GraphProcessor -- Visiting node [C]
-20:59:32.771 [main] TRACE c.i.t.domain.usecase.GraphProcessor --  >> neighbor: [D] tentative cost: [PT19H] by TRUCK
-20:59:32.771 [main] TRACE c.i.t.domain.usecase.GraphProcessor --  >> [?] tentative neighbor with a shorter route. Adding to path
-20:59:32.771 [main] TRACE c.i.t.domain.usecase.GraphProcessor --  >> Marking node [C] as visited
-20:59:32.771 [main] TRACE c.i.t.domain.usecase.GraphProcessor -- Visiting node [D]
-20:59:32.771 [main] TRACE c.i.t.domain.usecase.GraphProcessor --  >> neighbor: [E] tentative cost: [PT28H] by TRUCK
-20:59:32.771 [main] TRACE c.i.t.domain.usecase.GraphProcessor --  >> Marking node [D] as visited
-20:59:32.772 [main] TRACE c.i.t.domain.usecase.GraphProcessor -- Discarding node [D] as it has already been visited
-20:59:32.772 [main] TRACE c.i.t.domain.usecase.GraphProcessor -- Visiting node [E]
-20:59:32.772 [main] TRACE c.i.t.domain.usecase.GraphProcessor --  >> Marking node [E] as visited
-20:59:32.772 [main] TRACE c.i.t.domain.usecase.GraphProcessor -- *** Evaluation finished with Path [Route(id=b55c4985-46b8-4d45-aca4-815cd550d19c, origin=City(code=c42d3d74-9a0c-4d5c-9820-cfefdec61e27, name=A, handlingCost=0), destination=City(code=44456690-7844-4863-9a0d-70439e1f996b, name=H, handlingCost=0), transportType=TRUCK, cost=PT8H), Route(id=228536ae-19b9-44e6-b906-9011cdc67709, origin=City(code=65bc6db7-07f3-426f-b7eb-92a8059aca40, name=G, handlingCost=0), destination=City(code=44456690-7844-4863-9a0d-70439e1f996b, name=H, handlingCost=0), transportType=TRUCK, cost=PT1H), Route(id=072a3eed-3901-49d3-a8e1-54d51169ef0c, origin=City(code=65bc6db7-07f3-426f-b7eb-92a8059aca40, name=G, handlingCost=0), destination=City(code=242932f9-0409-4337-9599-98b614ddbeb5, name=F, handlingCost=0), transportType=TRUCK, cost=PT2H), Route(id=6db2a382-ea27-4e33-a503-62c1c06d48ff, origin=City(code=242932f9-0409-4337-9599-98b614ddbeb5, name=F, handlingCost=0), destination=City(code=9fcc3be6-ed96-4d50-a061-1c423775f700, name=E, handlingCost=0), transportType=TRUCK, cost=PT10H)]
-20:59:32.780 [main] TRACE c.i.t.d.u.ProcessPendingShipmentsUseCaseImpl -- Time cost from [ A <-> E ] is PT21H
-20:59:32.780 [main] TRACE c.i.t.d.u.ProcessPendingShipmentsUseCaseImpl -- Path: A | (A -> [TRUCK] -> H) | (G -> [TRUCK] -> H) | (G -> [TRUCK] -> F) | (F -> [TRUCK] -> E)
-20:59:32.781 [main] INFO  c.i.t.d.u.ProcessPendingShipmentsUseCaseImpl -- Route processed in 19 ms
-20:59:32.781 [main] INFO  c.i.t.d.u.ProcessPendingShipmentsUseCaseImpl -- Saving route planification for shipment: A-E
-20:59:32.782 [main] INFO  c.i.t.d.u.ProcessPendingShipmentsUseCaseImpl -- Route saved in 19 ms
-Route(id=b55c4985-46b8-4d45-aca4-815cd550d19c, origin=City(code=c42d3d74-9a0c-4d5c-9820-cfefdec61e27, name=A, handlingCost=0), destination=City(code=44456690-7844-4863-9a0d-70439e1f996b, name=H, handlingCost=0), transportType=TRUCK, cost=PT8H)
-Route(id=228536ae-19b9-44e6-b906-9011cdc67709, origin=City(code=65bc6db7-07f3-426f-b7eb-92a8059aca40, name=G, handlingCost=0), destination=City(code=44456690-7844-4863-9a0d-70439e1f996b, name=H, handlingCost=0), transportType=TRUCK, cost=PT1H)
-Route(id=072a3eed-3901-49d3-a8e1-54d51169ef0c, origin=City(code=65bc6db7-07f3-426f-b7eb-92a8059aca40, name=G, handlingCost=0), destination=City(code=242932f9-0409-4337-9599-98b614ddbeb5, name=F, handlingCost=0), transportType=TRUCK, cost=PT2H)
-Route(id=6db2a382-ea27-4e33-a503-62c1c06d48ff, origin=City(code=242932f9-0409-4337-9599-98b614ddbeb5, name=F, handlingCost=0), destination=City(code=9fcc3be6-ed96-4d50-a061-1c423775f700, name=E, handlingCost=0), transportType=TRUCK, cost=PT10H)
+  <testcase name="dijkstraComplexScenarioTest" classname="com.itxiop.transport.domain.usecase.ProcessPendingShipmentsUseCaseImplTest" time="0.101">
+    <system-out><![CDATA[11:45:24.257 [main] INFO  c.i.t.d.u.ProcessPendingShipmentsUseCaseImpl -- Processing shipment: Shipment(id=55227dfb-8306-4a2a-92e4-f950055d37a9, departureDate=2024-01-01T09:00Z, expectedArrivalDate=2024-01-02T09:00Z, origin=City(code=6c83334b-e1ef-4084-b644-51c755740fea, name=A, handlingCost=0), destination=City(code=48ea46f8-eef8-4b1b-bbe7-c52bc8470e27, name=E, handlingCost=0), status=PENDING, routePlan=null)
+11:45:24.268 [main] INFO  c.i.t.d.u.ProcessPendingShipmentsUseCaseImpl -- Processing route: TRUCK
+11:45:24.269 [main] TRACE c.i.t.domain.usecase.GraphProcessor -- *** Evaluating dijkstra shortest path algorithm:
+11:45:24.271 [main] TRACE c.i.t.domain.usecase.GraphProcessor -- Visiting node [A]
+11:45:24.272 [main] TRACE c.i.t.domain.usecase.GraphProcessor --  >> neighbor: [H] tentative cost: [PT8H] by TRUCK
+11:45:24.272 [main] TRACE c.i.t.domain.usecase.GraphProcessor --  >> [?] tentative neighbor with a shorter route. Adding to path
+11:45:24.272 [main] TRACE c.i.t.domain.usecase.GraphProcessor --  >> neighbor: [B] tentative cost: [PT4H] by TRUCK
+11:45:24.272 [main] TRACE c.i.t.domain.usecase.GraphProcessor --  >> [?] tentative neighbor with a shorter route. Adding to path
+11:45:24.273 [main] TRACE c.i.t.domain.usecase.GraphProcessor --  >> Marking node [A] as visited
+11:45:24.273 [main] TRACE c.i.t.domain.usecase.GraphProcessor -- Visiting node [B]
+11:45:24.273 [main] TRACE c.i.t.domain.usecase.GraphProcessor --  >> neighbor: [H] tentative cost: [PT15H] by TRUCK
+11:45:24.273 [main] TRACE c.i.t.domain.usecase.GraphProcessor --  >> neighbor: [C] tentative cost: [PT12H] by TRUCK
+11:45:24.273 [main] TRACE c.i.t.domain.usecase.GraphProcessor --  >> [?] tentative neighbor with a shorter route. Adding to path
+11:45:24.273 [main] TRACE c.i.t.domain.usecase.GraphProcessor --  >> Marking node [B] as visited
+11:45:24.273 [main] TRACE c.i.t.domain.usecase.GraphProcessor -- Visiting node [H]
+11:45:24.273 [main] TRACE c.i.t.domain.usecase.GraphProcessor --  >> neighbor: [I] tentative cost: [PT15H] by TRUCK
+11:45:24.273 [main] TRACE c.i.t.domain.usecase.GraphProcessor --  >> [?] tentative neighbor with a shorter route. Adding to path
+11:45:24.273 [main] TRACE c.i.t.domain.usecase.GraphProcessor --  >> neighbor: [G] tentative cost: [PT9H] by TRUCK
+11:45:24.273 [main] TRACE c.i.t.domain.usecase.GraphProcessor --  >> [?] tentative neighbor with a shorter route. Adding to path
+11:45:24.273 [main] TRACE c.i.t.domain.usecase.GraphProcessor --  >> Marking node [H] as visited
+11:45:24.274 [main] TRACE c.i.t.domain.usecase.GraphProcessor -- Visiting node [G]
+11:45:24.274 [main] TRACE c.i.t.domain.usecase.GraphProcessor --  >> neighbor: [I] tentative cost: [PT11H] by TRUCK
+11:45:24.274 [main] TRACE c.i.t.domain.usecase.GraphProcessor --  >> [?] tentative neighbor with a shorter route. Adding to path
+11:45:24.274 [main] TRACE c.i.t.domain.usecase.GraphProcessor --  >> neighbor: [F] tentative cost: [PT11H] by TRUCK
+11:45:24.274 [main] TRACE c.i.t.domain.usecase.GraphProcessor --  >> [?] tentative neighbor with a shorter route. Adding to path
+11:45:24.274 [main] TRACE c.i.t.domain.usecase.GraphProcessor --  >> Marking node [G] as visited
+11:45:24.274 [main] TRACE c.i.t.domain.usecase.GraphProcessor -- Visiting node [I]
+11:45:24.274 [main] TRACE c.i.t.domain.usecase.GraphProcessor --  >> neighbor: [C] tentative cost: [PT13H] by TRUCK
+11:45:24.274 [main] TRACE c.i.t.domain.usecase.GraphProcessor --  >> Marking node [I] as visited
+11:45:24.274 [main] TRACE c.i.t.domain.usecase.GraphProcessor -- Visiting node [F]
+11:45:24.274 [main] TRACE c.i.t.domain.usecase.GraphProcessor --  >> neighbor: [D] tentative cost: [PT25H] by TRUCK
+11:45:24.274 [main] TRACE c.i.t.domain.usecase.GraphProcessor --  >> [?] tentative neighbor with a shorter route. Adding to path
+11:45:24.274 [main] TRACE c.i.t.domain.usecase.GraphProcessor --  >> neighbor: [E] tentative cost: [PT21H] by TRUCK
+11:45:24.275 [main] TRACE c.i.t.domain.usecase.GraphProcessor --  >> [?] tentative neighbor with a shorter route. Adding to path
+11:45:24.275 [main] TRACE c.i.t.domain.usecase.GraphProcessor --  >> neighbor: [C] tentative cost: [PT15H] by TRUCK
+11:45:24.275 [main] TRACE c.i.t.domain.usecase.GraphProcessor --  >> Marking node [F] as visited
+11:45:24.275 [main] TRACE c.i.t.domain.usecase.GraphProcessor -- Discarding node [I] as it has already been visited
+11:45:24.275 [main] TRACE c.i.t.domain.usecase.GraphProcessor -- Visiting node [C]
+11:45:24.275 [main] TRACE c.i.t.domain.usecase.GraphProcessor --  >> neighbor: [D] tentative cost: [PT19H] by TRUCK
+11:45:24.275 [main] TRACE c.i.t.domain.usecase.GraphProcessor --  >> [?] tentative neighbor with a shorter route. Adding to path
+11:45:24.275 [main] TRACE c.i.t.domain.usecase.GraphProcessor --  >> Marking node [C] as visited
+11:45:24.275 [main] TRACE c.i.t.domain.usecase.GraphProcessor -- Visiting node [D]
+11:45:24.275 [main] TRACE c.i.t.domain.usecase.GraphProcessor --  >> neighbor: [E] tentative cost: [PT28H] by TRUCK
+11:45:24.275 [main] TRACE c.i.t.domain.usecase.GraphProcessor --  >> Marking node [D] as visited
+11:45:24.275 [main] TRACE c.i.t.domain.usecase.GraphProcessor -- Discarding node [D] as it has already been visited
+11:45:24.275 [main] TRACE c.i.t.domain.usecase.GraphProcessor -- Visiting node [E]
+11:45:24.275 [main] TRACE c.i.t.domain.usecase.GraphProcessor --  >> Marking node [E] as visited
+11:45:24.275 [main] TRACE c.i.t.domain.usecase.GraphProcessor -- *** Evaluation finished with Path [Route(id=c7154a3d-22ac-49d7-8c4a-c53e9d9cd036, origin=City(code=6c83334b-e1ef-4084-b644-51c755740fea, name=A, handlingCost=0), destination=City(code=4154a678-f621-460c-8b21-80ba7c309aa8, name=H, handlingCost=0), transportType=TRUCK, cost=PT8H), Route(id=25e16b31-3772-47cd-bdb8-c0ddb129aab6, origin=City(code=334e0492-42bb-42e1-85ff-16db1dc1fc52, name=G, handlingCost=0), destination=City(code=4154a678-f621-460c-8b21-80ba7c309aa8, name=H, handlingCost=0), transportType=TRUCK, cost=PT1H), Route(id=c851d641-f9c5-466b-b24d-6ec9e4aa2d2c, origin=City(code=334e0492-42bb-42e1-85ff-16db1dc1fc52, name=G, handlingCost=0), destination=City(code=78dd33fd-dcf1-4465-acba-e6daaf6cb85c, name=F, handlingCost=0), transportType=TRUCK, cost=PT2H), Route(id=fc353ab6-2dc3-4a39-9aab-13f4f74839cf, origin=City(code=78dd33fd-dcf1-4465-acba-e6daaf6cb85c, name=F, handlingCost=0), destination=City(code=48ea46f8-eef8-4b1b-bbe7-c52bc8470e27, name=E, handlingCost=0), transportType=TRUCK, cost=PT10H)]
+11:45:24.282 [main] TRACE c.i.t.d.u.ProcessPendingShipmentsUseCaseImpl -- Time cost from [ A <-> E ] is PT21H
+11:45:24.284 [main] TRACE c.i.t.d.u.ProcessPendingShipmentsUseCaseImpl -- Path: A | (A -> [TRUCK] -> H) | (G -> [TRUCK] -> H) | (G -> [TRUCK] -> F) | (F -> [TRUCK] -> E)
+11:45:24.285 [main] INFO  c.i.t.d.u.ProcessPendingShipmentsUseCaseImpl -- Route processed in 17 ms
+11:45:24.285 [main] INFO  c.i.t.d.u.ProcessPendingShipmentsUseCaseImpl -- Saving route planification for shipment: A-E
+11:45:24.286 [main] INFO  c.i.t.d.u.ProcessPendingShipmentsUseCaseImpl -- Route saved in 18 ms
+Route(id=c7154a3d-22ac-49d7-8c4a-c53e9d9cd036, origin=City(code=6c83334b-e1ef-4084-b644-51c755740fea, name=A, handlingCost=0), destination=City(code=4154a678-f621-460c-8b21-80ba7c309aa8, name=H, handlingCost=0), transportType=TRUCK, cost=PT8H)
+Route(id=25e16b31-3772-47cd-bdb8-c0ddb129aab6, origin=City(code=334e0492-42bb-42e1-85ff-16db1dc1fc52, name=G, handlingCost=0), destination=City(code=4154a678-f621-460c-8b21-80ba7c309aa8, name=H, handlingCost=0), transportType=TRUCK, cost=PT1H)
+Route(id=c851d641-f9c5-466b-b24d-6ec9e4aa2d2c, origin=City(code=334e0492-42bb-42e1-85ff-16db1dc1fc52, name=G, handlingCost=0), destination=City(code=78dd33fd-dcf1-4465-acba-e6daaf6cb85c, name=F, handlingCost=0), transportType=TRUCK, cost=PT2H)
+Route(id=fc353ab6-2dc3-4a39-9aab-13f4f74839cf, origin=City(code=78dd33fd-dcf1-4465-acba-e6daaf6cb85c, name=F, handlingCost=0), destination=City(code=48ea46f8-eef8-4b1b-bbe7-c52bc8470e27, name=E, handlingCost=0), transportType=TRUCK, cost=PT10H)
 ]]></system-out>
   </testcase>
-  <testcase name="dijkstraBasicTest" classname="com.itxiop.transport.domain.usecase.ProcessPendingShipmentsUseCaseImplTest" time="0.008">
-    <system-out><![CDATA[20:59:32.808 [main] INFO  c.i.t.d.u.ProcessPendingShipmentsUseCaseImpl -- Processing shipment: Shipment(id=ba0d0d32-b9fa-4fae-9e6e-782879ac86bf, departureDate=2024-01-01T09:00Z, expectedArrivalDate=2024-01-01T13:00Z, origin=City(code=dc5193cb-7412-405e-a871-f1988dc5fb89, name=A, handlingCost=0), destination=City(code=54f883cf-f71a-4f7f-82ee-1ec42e6a4b82, name=E, handlingCost=0), status=PENDING, routePlan=null)
-20:59:32.808 [main] INFO  c.i.t.d.u.ProcessPendingShipmentsUseCaseImpl -- Processing route: TRUCK
-20:59:32.808 [main] TRACE c.i.t.domain.usecase.GraphProcessor -- *** Evaluating dijkstra shortest path algorithm:
-20:59:32.808 [main] TRACE c.i.t.domain.usecase.GraphProcessor -- Visiting node [A]
-20:59:32.808 [main] TRACE c.i.t.domain.usecase.GraphProcessor --  >> neighbor: [C] tentative cost: [PT1H] by TRUCK
-20:59:32.809 [main] TRACE c.i.t.domain.usecase.GraphProcessor --  >> [?] tentative neighbor with a shorter route. Adding to path
-20:59:32.809 [main] TRACE c.i.t.domain.usecase.GraphProcessor --  >> neighbor: [B] tentative cost: [PT3H] by TRUCK
-20:59:32.809 [main] TRACE c.i.t.domain.usecase.GraphProcessor --  >> [?] tentative neighbor with a shorter route. Adding to path
-20:59:32.809 [main] TRACE c.i.t.domain.usecase.GraphProcessor --  >> Marking node [A] as visited
-20:59:32.809 [main] TRACE c.i.t.domain.usecase.GraphProcessor -- Visiting node [C]
-20:59:32.809 [main] TRACE c.i.t.domain.usecase.GraphProcessor --  >> neighbor: [B] tentative cost: [PT8H] by TRUCK
-20:59:32.809 [main] TRACE c.i.t.domain.usecase.GraphProcessor --  >> neighbor: [D] tentative cost: [PT3H] by TRUCK
-20:59:32.809 [main] TRACE c.i.t.domain.usecase.GraphProcessor --  >> [?] tentative neighbor with a shorter route. Adding to path
-20:59:32.809 [main] TRACE c.i.t.domain.usecase.GraphProcessor --  >> Marking node [C] as visited
-20:59:32.809 [main] TRACE c.i.t.domain.usecase.GraphProcessor -- Visiting node [B]
-20:59:32.809 [main] TRACE c.i.t.domain.usecase.GraphProcessor --  >> neighbor: [E] tentative cost: [PT4H] by TRUCK
-20:59:32.809 [main] TRACE c.i.t.domain.usecase.GraphProcessor --  >> [?] tentative neighbor with a shorter route. Adding to path
-20:59:32.809 [main] TRACE c.i.t.domain.usecase.GraphProcessor --  >> neighbor: [D] tentative cost: [PT8H] by TRUCK
-20:59:32.809 [main] TRACE c.i.t.domain.usecase.GraphProcessor --  >> Marking node [B] as visited
-20:59:32.809 [main] TRACE c.i.t.domain.usecase.GraphProcessor -- Visiting node [D]
-20:59:32.809 [main] TRACE c.i.t.domain.usecase.GraphProcessor --  >> neighbor: [E] tentative cost: [PT10H] by TRUCK
-20:59:32.809 [main] TRACE c.i.t.domain.usecase.GraphProcessor --  >> Marking node [D] as visited
-20:59:32.809 [main] TRACE c.i.t.domain.usecase.GraphProcessor -- Visiting node [E]
-20:59:32.809 [main] TRACE c.i.t.domain.usecase.GraphProcessor --  >> Marking node [E] as visited
-20:59:32.809 [main] TRACE c.i.t.domain.usecase.GraphProcessor -- *** Evaluation finished with Path [Route(id=18d984c0-6583-4d35-b242-b4213d84afc5, origin=City(code=dc5193cb-7412-405e-a871-f1988dc5fb89, name=A, handlingCost=0), destination=City(code=bd082853-c157-4260-8a7c-ad5831551c55, name=B, handlingCost=0), transportType=TRUCK, cost=PT3H), Route(id=7919ef7e-e225-4124-b628-491d95f813ae, origin=City(code=bd082853-c157-4260-8a7c-ad5831551c55, name=B, handlingCost=0), destination=City(code=54f883cf-f71a-4f7f-82ee-1ec42e6a4b82, name=E, handlingCost=0), transportType=TRUCK, cost=PT1H)]
-20:59:32.810 [main] TRACE c.i.t.d.u.ProcessPendingShipmentsUseCaseImpl -- Time cost from [ A <-> E ] is PT4H
-20:59:32.810 [main] TRACE c.i.t.d.u.ProcessPendingShipmentsUseCaseImpl -- Path: A | (A -> [TRUCK] -> B) | (B -> [TRUCK] -> E)
-20:59:32.810 [main] INFO  c.i.t.d.u.ProcessPendingShipmentsUseCaseImpl -- Route processed in 1 ms
-20:59:32.810 [main] INFO  c.i.t.d.u.ProcessPendingShipmentsUseCaseImpl -- Saving route planification for shipment: A-E
-20:59:32.810 [main] INFO  c.i.t.d.u.ProcessPendingShipmentsUseCaseImpl -- Route saved in 1 ms
-Route(id=18d984c0-6583-4d35-b242-b4213d84afc5, origin=City(code=dc5193cb-7412-405e-a871-f1988dc5fb89, name=A, handlingCost=0), destination=City(code=bd082853-c157-4260-8a7c-ad5831551c55, name=B, handlingCost=0), transportType=TRUCK, cost=PT3H)
-Route(id=7919ef7e-e225-4124-b628-491d95f813ae, origin=City(code=bd082853-c157-4260-8a7c-ad5831551c55, name=B, handlingCost=0), destination=City(code=54f883cf-f71a-4f7f-82ee-1ec42e6a4b82, name=E, handlingCost=0), transportType=TRUCK, cost=PT1H)
+  <testcase name="dijkstraBasicTest" classname="com.itxiop.transport.domain.usecase.ProcessPendingShipmentsUseCaseImplTest" time="0.007">
+    <system-out><![CDATA[11:45:24.306 [main] INFO  c.i.t.d.u.ProcessPendingShipmentsUseCaseImpl -- Processing shipment: Shipment(id=6d0b4e6a-2f6b-49da-9399-273ace459961, departureDate=2024-01-01T09:00Z, expectedArrivalDate=2024-01-01T13:00Z, origin=City(code=b27f645b-0b34-481f-b6b4-2aa03b89a7f3, name=A, handlingCost=0), destination=City(code=7ff753c4-d0e4-40b6-8172-00c9ca1d450f, name=E, handlingCost=0), status=PENDING, routePlan=null)
+11:45:24.306 [main] INFO  c.i.t.d.u.ProcessPendingShipmentsUseCaseImpl -- Processing route: TRUCK
+11:45:24.306 [main] TRACE c.i.t.domain.usecase.GraphProcessor -- *** Evaluating dijkstra shortest path algorithm:
+11:45:24.307 [main] TRACE c.i.t.domain.usecase.GraphProcessor -- Visiting node [A]
+11:45:24.307 [main] TRACE c.i.t.domain.usecase.GraphProcessor --  >> neighbor: [B] tentative cost: [PT3H] by TRUCK
+11:45:24.307 [main] TRACE c.i.t.domain.usecase.GraphProcessor --  >> [?] tentative neighbor with a shorter route. Adding to path
+11:45:24.307 [main] TRACE c.i.t.domain.usecase.GraphProcessor --  >> neighbor: [C] tentative cost: [PT1H] by TRUCK
+11:45:24.307 [main] TRACE c.i.t.domain.usecase.GraphProcessor --  >> [?] tentative neighbor with a shorter route. Adding to path
+11:45:24.307 [main] TRACE c.i.t.domain.usecase.GraphProcessor --  >> Marking node [A] as visited
+11:45:24.307 [main] TRACE c.i.t.domain.usecase.GraphProcessor -- Visiting node [C]
+11:45:24.307 [main] TRACE c.i.t.domain.usecase.GraphProcessor --  >> neighbor: [B] tentative cost: [PT8H] by TRUCK
+11:45:24.307 [main] TRACE c.i.t.domain.usecase.GraphProcessor --  >> neighbor: [D] tentative cost: [PT3H] by TRUCK
+11:45:24.307 [main] TRACE c.i.t.domain.usecase.GraphProcessor --  >> [?] tentative neighbor with a shorter route. Adding to path
+11:45:24.307 [main] TRACE c.i.t.domain.usecase.GraphProcessor --  >> Marking node [C] as visited
+11:45:24.307 [main] TRACE c.i.t.domain.usecase.GraphProcessor -- Visiting node [B]
+11:45:24.307 [main] TRACE c.i.t.domain.usecase.GraphProcessor --  >> neighbor: [D] tentative cost: [PT8H] by TRUCK
+11:45:24.307 [main] TRACE c.i.t.domain.usecase.GraphProcessor --  >> neighbor: [E] tentative cost: [PT4H] by TRUCK
+11:45:24.307 [main] TRACE c.i.t.domain.usecase.GraphProcessor --  >> [?] tentative neighbor with a shorter route. Adding to path
+11:45:24.307 [main] TRACE c.i.t.domain.usecase.GraphProcessor --  >> Marking node [B] as visited
+11:45:24.307 [main] TRACE c.i.t.domain.usecase.GraphProcessor -- Visiting node [D]
+11:45:24.307 [main] TRACE c.i.t.domain.usecase.GraphProcessor --  >> neighbor: [E] tentative cost: [PT10H] by TRUCK
+11:45:24.307 [main] TRACE c.i.t.domain.usecase.GraphProcessor --  >> Marking node [D] as visited
+11:45:24.307 [main] TRACE c.i.t.domain.usecase.GraphProcessor -- Visiting node [E]
+11:45:24.307 [main] TRACE c.i.t.domain.usecase.GraphProcessor --  >> Marking node [E] as visited
+11:45:24.308 [main] TRACE c.i.t.domain.usecase.GraphProcessor -- *** Evaluation finished with Path [Route(id=a53a580e-4961-4f70-b8b8-1ff3acbc5ade, origin=City(code=b27f645b-0b34-481f-b6b4-2aa03b89a7f3, name=A, handlingCost=0), destination=City(code=a9d89cf0-f203-4b50-9ead-b646b7d042e1, name=B, handlingCost=0), transportType=TRUCK, cost=PT3H), Route(id=cf5039bc-af8e-48ca-b935-45ff8e47b746, origin=City(code=a9d89cf0-f203-4b50-9ead-b646b7d042e1, name=B, handlingCost=0), destination=City(code=7ff753c4-d0e4-40b6-8172-00c9ca1d450f, name=E, handlingCost=0), transportType=TRUCK, cost=PT1H)]
+11:45:24.308 [main] TRACE c.i.t.d.u.ProcessPendingShipmentsUseCaseImpl -- Time cost from [ A <-> E ] is PT4H
+11:45:24.308 [main] TRACE c.i.t.d.u.ProcessPendingShipmentsUseCaseImpl -- Path: A | (A -> [TRUCK] -> B) | (B -> [TRUCK] -> E)
+11:45:24.308 [main] INFO  c.i.t.d.u.ProcessPendingShipmentsUseCaseImpl -- Route processed in 1 ms
+11:45:24.308 [main] INFO  c.i.t.d.u.ProcessPendingShipmentsUseCaseImpl -- Saving route planification for shipment: A-E
+11:45:24.308 [main] INFO  c.i.t.d.u.ProcessPendingShipmentsUseCaseImpl -- Route saved in 1 ms
+Route(id=a53a580e-4961-4f70-b8b8-1ff3acbc5ade, origin=City(code=b27f645b-0b34-481f-b6b4-2aa03b89a7f3, name=A, handlingCost=0), destination=City(code=a9d89cf0-f203-4b50-9ead-b646b7d042e1, name=B, handlingCost=0), transportType=TRUCK, cost=PT3H)
+Route(id=cf5039bc-af8e-48ca-b935-45ff8e47b746, origin=City(code=a9d89cf0-f203-4b50-9ead-b646b7d042e1, name=B, handlingCost=0), destination=City(code=7ff753c4-d0e4-40b6-8172-00c9ca1d450f, name=E, handlingCost=0), transportType=TRUCK, cost=PT1H)
 ]]></system-out>
   </testcase>
 </testsuite>

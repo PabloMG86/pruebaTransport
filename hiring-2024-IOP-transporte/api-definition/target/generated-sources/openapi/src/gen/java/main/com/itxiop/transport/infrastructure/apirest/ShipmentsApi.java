@@ -32,7 +32,7 @@ import java.util.Map;
 import java.util.Optional;
 import jakarta.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-01-16T08:56:22.982580100+01:00[Europe/Madrid]", comments = "Generator version: 7.18.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-01-16T12:00:08.095832900+01:00[Europe/Madrid]", comments = "Generator version: 7.18.0")
 @Validated
 @Tag(name = "Shipments", description = "Shipment operation endpoints")
 public interface ShipmentsApi {

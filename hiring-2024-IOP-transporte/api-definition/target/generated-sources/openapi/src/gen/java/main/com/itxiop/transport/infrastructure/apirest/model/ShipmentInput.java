@@ -22,7 +22,7 @@ import jakarta.annotation.Generated;
  */
 
 @Schema(name = "ShipmentInput", description = "Payload used to ingest a shipment")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-01-16T08:56:22.982580100+01:00[Europe/Madrid]", comments = "Generator version: 7.18.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-01-16T12:00:08.095832900+01:00[Europe/Madrid]", comments = "Generator version: 7.18.0")
 public class ShipmentInput {
 
   private UUID shipmentId;
@@ -80,7 +80,7 @@ public class ShipmentInput {
    * @return originCityCode
    */
   @NotNull @Size(min = 3, max = 3) 
-  @Schema(name = "originCityCode", example = "SVQ", description = "Origin city identifier (3-char unique identifier)", requiredMode = Schema.RequiredMode.REQUIRED)
+  @Schema(name = "originCityCode", example = "BER", description = "Origin city identifier (3-char unique identifier)", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("originCityCode")
   public String getOriginCityCode() {
     return originCityCode;
@@ -100,7 +100,7 @@ public class ShipmentInput {
    * @return destinationCityCode
    */
   @NotNull @Size(min = 3, max = 3) 
-  @Schema(name = "destinationCityCode", example = "MAD", description = "Destination city identifier (3-char unique identifier)", requiredMode = Schema.RequiredMode.REQUIRED)
+  @Schema(name = "destinationCityCode", example = "REY", description = "Destination city identifier (3-char unique identifier)", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("destinationCityCode")
   public String getDestinationCityCode() {
     return destinationCityCode;

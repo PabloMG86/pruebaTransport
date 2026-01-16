@@ -58,14 +58,12 @@ public class RouteRepositoryFileAdapter implements RouteRepositoryPort, Initiali
               }
             } catch (IOException e) {
               throw new CoreRuntimeException("Error reading file: " + file, e);
-            } catch (ResourceNotFoundException e) {
-                throw new CoreRuntimeException("Graph file references missing resources", e);
             }
           });
     }
   }
 
-  private void readGraph(TransportTypeEnum transportTypeEnum, Path filePath) throws IOException, ResourceNotFoundException {
+  private void readGraph(TransportTypeEnum transportTypeEnum, Path filePath) throws IOException {
 
     List<Route> routeList = new ArrayList<>();
     routeBook.put(transportTypeEnum, routeList);
@@ -76,8 +74,15 @@ public class RouteRepositoryFileAdapter implements RouteRepositoryPort, Initiali
         String origin = parts[0];
         String destination = parts[1];
         Duration cost = Duration.of(Long.parseLong(parts[2]), ChronoUnit.HOURS);
-        routeList.add(
-            Route.of(UUID.randomUUID(), cityRepositoryPort.findByCityCode(origin), cityRepositoryPort.findByCityCode(destination), transportTypeEnum, cost));
+        try {
+          routeList.add(Route.of(UUID.randomUUID(),
+              cityRepositoryPort.findByCityCode(origin),
+              cityRepositoryPort.findByCityCode(destination),
+              transportTypeEnum,
+              cost));
+        } catch (ResourceNotFoundException e) {
+          throw new CoreRuntimeException("Graph file references missing resources", e);
+        }
       }
     }
   }

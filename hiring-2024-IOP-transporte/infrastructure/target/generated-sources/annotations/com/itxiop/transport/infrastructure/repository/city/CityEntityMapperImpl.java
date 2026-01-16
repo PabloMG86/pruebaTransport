@@ -8,8 +8,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2026-01-16T08:51:27+0100",
-    comments = "version: 1.6.0.Beta1, compiler: Eclipse JDT (IDE) 3.45.0.v20260101-2150, environment: Java 21.0.9 (Eclipse Adoptium)"
+    date = "2026-01-16T11:45:32+0100",
+    comments = "version: 1.6.0.Beta1, compiler: javac, environment: Java 17.0.17 (Microsoft)"
 )
 @Component
 public class CityEntityMapperImpl implements CityEntityMapper {

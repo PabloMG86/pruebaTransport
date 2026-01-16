@@ -12,7 +12,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.time.OffsetDateTime;
 import java.util.UUID;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.sameInstance;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -45,7 +46,7 @@ class FindShipmentByIdUseCaseTest {
 
     Shipment result = useCase.findShipmentById(id);
 
-    assertThat(result).isSameAs(expected);
+    assertThat(result, sameInstance(expected));
     verify(shipmentRepositoryPort).findShipmentById(id);
   }
 

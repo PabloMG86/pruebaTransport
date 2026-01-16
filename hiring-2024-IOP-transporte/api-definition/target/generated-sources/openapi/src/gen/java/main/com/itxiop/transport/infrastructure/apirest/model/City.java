@@ -18,7 +18,7 @@ import jakarta.annotation.Generated;
  * City
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-01-16T08:56:22.982580100+01:00[Europe/Madrid]", comments = "Generator version: 7.18.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-01-16T12:00:08.095832900+01:00[Europe/Madrid]", comments = "Generator version: 7.18.0")
 public class City {
 
   private String code;

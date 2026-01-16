@@ -3,6 +3,8 @@ package com.itxiop.transport.infrastructure.repository.shipment;
 import com.itxiop.transport.domain.city.repository.CityRepositoryPort;
 import com.itxiop.transport.domain.entities.Route;
 import com.itxiop.transport.domain.entities.Shipment;
+import com.itxiop.transport.domain.exceptions.CoreRuntimeException;
+import com.itxiop.transport.domain.exceptions.ResourceNotFoundException;
 import com.itxiop.transport.domain.shipment.repository.ShipmentRepositoryPort;
 import com.itxiop.transport.domain.shipment.vo.ShipmentInput;
 import lombok.RequiredArgsConstructor;
@@ -38,8 +40,12 @@ public class ShipmentH2RepositoryAdapter implements ShipmentRepositoryPort {
      log.info("Loading shipment with id: {}", shipment.getId());
 
     shipment.setRoutePlan(routes.getOrDefault(shipment.getId(), List.of()));
-    shipment.setOrigin(cityRepositoryPort.findByCityCode(entity.getOriginCode()));
-    shipment.setDestination(cityRepositoryPort.findByCityCode(entity.getDestinationCode()));
+    try {
+      shipment.setOrigin(cityRepositoryPort.findByCityCode(entity.getOriginCode()));
+      shipment.setDestination(cityRepositoryPort.findByCityCode(entity.getDestinationCode()));
+    } catch (ResourceNotFoundException e) {
+      throw new CoreRuntimeException("City not found for shipment " + entity.getId(), e);
+    }
     return shipment;
   }
 
@@ -73,8 +79,12 @@ public class ShipmentH2RepositoryAdapter implements ShipmentRepositoryPort {
       Shipment shipment = shipmentEntityMapper.toDomainEntity(entity);
 
       shipment.setRoutePlan(routes.getOrDefault(shipment.getId(), List.of()));
-      shipment.setOrigin(cityRepositoryPort.findByCityCode(entity.getOriginCode()));
-      shipment.setDestination(cityRepositoryPort.findByCityCode(entity.getDestinationCode()));
+      try {
+        shipment.setOrigin(cityRepositoryPort.findByCityCode(entity.getOriginCode()));
+        shipment.setDestination(cityRepositoryPort.findByCityCode(entity.getDestinationCode()));
+      } catch (ResourceNotFoundException e) {
+        throw new CoreRuntimeException("City not found for shipment " + entity.getId(), e);
+      }
       return shipment;
     }).toList();
   }
