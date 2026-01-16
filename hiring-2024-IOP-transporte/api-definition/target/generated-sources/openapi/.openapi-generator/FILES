@@ -1,3 +1,4 @@
+.openapi-generator-ignore
 README.md
 pom.xml
 src/gen/java/main/com/itxiop/transport/infrastructure/apirest/ApiUtil.java

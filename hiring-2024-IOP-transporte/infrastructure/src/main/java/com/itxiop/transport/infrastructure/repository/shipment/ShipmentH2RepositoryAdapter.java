@@ -1,6 +1,7 @@
 package com.itxiop.transport.infrastructure.repository.shipment;
 
 import com.itxiop.transport.domain.city.repository.CityRepositoryPort;
+import com.itxiop.transport.domain.entities.City;
 import com.itxiop.transport.domain.entities.Route;
 import com.itxiop.transport.domain.entities.Shipment;
 import com.itxiop.transport.domain.exceptions.CoreRuntimeException;
@@ -34,19 +35,7 @@ public class ShipmentH2RepositoryAdapter implements ShipmentRepositoryPort {
   private final ShipmentEntityMapper shipmentEntityMapper;
   
   public Shipment findShipmentById(UUID id) {
-
-    ShipmentEntity entity = shipmentH2Repository.findById(id).orElseThrow();
-    Shipment shipment = shipmentEntityMapper.toDomainEntity(entity);
-     log.info("Loading shipment with id: {}", shipment.getId());
-
-    shipment.setRoutePlan(routes.getOrDefault(shipment.getId(), List.of()));
-    try {
-      shipment.setOrigin(cityRepositoryPort.findByCityCode(entity.getOriginCode()));
-      shipment.setDestination(cityRepositoryPort.findByCityCode(entity.getDestinationCode()));
-    } catch (ResourceNotFoundException e) {
-      throw new CoreRuntimeException("City not found for shipment " + entity.getId(), e);
-    }
-    return shipment;
+    return hydrateShipmentWithDetails(id);
   }
 
   @Override
@@ -93,5 +82,55 @@ public class ShipmentH2RepositoryAdapter implements ShipmentRepositoryPort {
   public void deleteProcessedShipments() {
     log.trace("Delete all processed shipments");
     // TODO #4: Implemente deleted processed shipments
+  }
+
+  private Shipment hydrateShipmentWithDetails(UUID id) {
+    // Consulta join para evitar N+1; si falla, degradar al método clásico
+    try {
+      List<Object> rows = shipmentH2Repository.findShipmentDetails(id);
+      if (rows != null && !rows.isEmpty()) {
+        Object first = rows.get(0);
+        if (first instanceof Object[] row) {
+          Shipment shipment = new Shipment();
+          shipment.setId((UUID) row[0]);
+          shipment.setDepartureDate((java.time.OffsetDateTime) row[1]);
+          shipment.setExpectedArrivalDate((java.time.OffsetDateTime) row[2]);
+          shipment.setStatus(com.itxiop.transport.domain.vo.ShipmentStatusEnum.valueOf(row[5].toString()));
+          shipment.setOrigin(toCity(row[6], row[7], row[8]));
+          shipment.setDestination(toCity(row[9], row[10], row[11]));
+          shipment.setRoutePlan(routes.getOrDefault(shipment.getId(), List.of()));
+          return shipment;
+        } else if (first instanceof UUID) {
+          // Algunas BD/driver devuelven la primera columna directamente cuando solo hay una fila/columna
+          log.debug("Detail query returned UUID only; ignoring and using fallback for shipment {}", id);
+        } else {
+          log.warn("Detail query returned unexpected type {} for shipment {}", first.getClass(), id);
+        }
+      }
+    } catch (Exception e) {
+      log.warn("Fallback to standard load for shipment {} due to detail query failure: {}", id, e.getMessage());
+    }
+
+    // Fallback al mapeo original
+    ShipmentEntity entity = shipmentH2Repository.findById(id).orElseThrow();
+    Shipment shipment = shipmentEntityMapper.toDomainEntity(entity);
+    shipment.setRoutePlan(routes.getOrDefault(shipment.getId(), List.of()));
+    try {
+      shipment.setOrigin(cityRepositoryPort.findByCityCode(entity.getOriginCode()));
+      shipment.setDestination(cityRepositoryPort.findByCityCode(entity.getDestinationCode()));
+    } catch (ResourceNotFoundException e) {
+      throw new CoreRuntimeException("City not found for shipment " + entity.getId(), e);
+    }
+    return shipment;
+  }
+
+  private City toCity(Object code, Object name, Object handling) {
+    if (code == null) {
+      return null;
+    }
+    return City.of(
+        code.toString(),
+        name == null ? null : name.toString(),
+        handling == null ? null : new java.math.BigDecimal(handling.toString()));
   }
 }

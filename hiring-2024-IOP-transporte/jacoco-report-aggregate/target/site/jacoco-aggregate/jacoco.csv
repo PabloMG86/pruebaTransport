@@ -4,7 +4,7 @@ com.itxiop.transport:jacoco-report-aggregate/hiring-challenge-boot,com.itxiop.tr
 com.itxiop.transport:jacoco-report-aggregate/hiring-challenge-domain,com.itxiop.transport.domain.route.vo,RouteResult,0,9,0,0,0,1,0,1,0,1
 com.itxiop.transport:jacoco-report-aggregate/hiring-challenge-domain,com.itxiop.transport.domain.vo,ShipmentStatusEnum,0,21,0,0,0,4,0,1,0,1
 com.itxiop.transport:jacoco-report-aggregate/hiring-challenge-domain,com.itxiop.transport.domain.vo,TransportTypeEnum,0,27,0,0,0,5,0,1,0,1
-com.itxiop.transport:jacoco-report-aggregate/hiring-challenge-domain,com.itxiop.transport.domain.exceptions,CoreRuntimeException,9,0,0,0,4,0,2,0,2,0
+com.itxiop.transport:jacoco-report-aggregate/hiring-challenge-domain,com.itxiop.transport.domain.exceptions,CoreRuntimeException,5,4,0,0,2,2,1,1,1,1
 com.itxiop.transport:jacoco-report-aggregate/hiring-challenge-domain,com.itxiop.transport.domain.exceptions,ResourceNotFoundException,9,0,0,0,4,0,2,0,2,0
 com.itxiop.transport:jacoco-report-aggregate/hiring-challenge-domain,com.itxiop.transport.domain.exceptions,DomainException,9,0,0,0,4,0,2,0,2,0
 com.itxiop.transport:jacoco-report-aggregate/hiring-challenge-application,com.itxiop.transport.domain.usecase,LoadShipmentUseCaseImpl,0,12,0,0,0,4,0,2,0,2
@@ -19,7 +19,7 @@ com.itxiop.transport:jacoco-report-aggregate/hiring-challenge-infrastructure,com
 com.itxiop.transport:jacoco-report-aggregate/hiring-challenge-infrastructure,com.itxiop.transport.infrastructure.repository.route,RouteRepositoryFileAdapter,16,142,1,3,4,30,1,10,0,9
 com.itxiop.transport:jacoco-report-aggregate/hiring-challenge-infrastructure,com.itxiop.transport.infrastructure.apirest.converters,MarshallingCSVConverter,171,0,14,0,28,0,14,0,7,0
 com.itxiop.transport:jacoco-report-aggregate/hiring-challenge-infrastructure,com.itxiop.transport.infrastructure.repository.shipment,ShipmentEntityMapper,10,9,2,2,1,2,2,1,0,1
-com.itxiop.transport:jacoco-report-aggregate/hiring-challenge-infrastructure,com.itxiop.transport.infrastructure.repository.shipment,ShipmentH2RepositoryAdapter,116,47,0,0,26,9,6,2,6,2
+com.itxiop.transport:jacoco-report-aggregate/hiring-challenge-infrastructure,com.itxiop.transport.infrastructure.repository.shipment,ShipmentH2RepositoryAdapter,214,79,10,4,42,18,14,3,7,3
 com.itxiop.transport:jacoco-report-aggregate/hiring-challenge-infrastructure,com.itxiop.transport.infrastructure.repository.shipment,ShipmentEntityMapperImpl,143,43,17,1,44,10,16,2,7,2
 com.itxiop.transport:jacoco-report-aggregate/hiring-challenge-infrastructure,com.itxiop.transport.infrastructure.apirest.controller,ShipmentsApiController,12,37,0,0,4,10,2,3,2,3
 com.itxiop.transport:jacoco-report-aggregate/hiring-challenge-infrastructure,com.itxiop.transport.infrastructure.repository.city,CityRepositoryH2Adapter,13,0,0,0,4,0,3,0,3,0

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../jacoco-resources/report.gif" type="image/gif"/><title>ShipmentH2RepositoryAdapter.java</title><link rel="stylesheet" href="../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../index.html" class="el_report">com.itxiop.transport:jacoco-report-aggregate</a> &gt; <a href="../index.html" class="el_bundle">hiring-challenge-infrastructure</a> &gt; <a href="index.source.html" class="el_package">com.itxiop.transport.infrastructure.repository.shipment</a> &gt; <span class="el_source">ShipmentH2RepositoryAdapter.java</span></div><h1>ShipmentH2RepositoryAdapter.java</h1><pre class="source lang-java linenums">package com.itxiop.transport.infrastructure.repository.shipment;
 
 import com.itxiop.transport.domain.city.repository.CityRepositoryPort;
+import com.itxiop.transport.domain.entities.City;
 import com.itxiop.transport.domain.entities.Route;
 import com.itxiop.transport.domain.entities.Shipment;
 import com.itxiop.transport.domain.exceptions.CoreRuntimeException;
@@ -20,7 +21,7 @@ import java.util.UUID;
  * &lt;p&gt; Implementation of {@link ShipmentRepositoryPort} with H2 database &lt;/p&gt;
  */
 @Component
-<span class="fc" id="L23">@Slf4j</span>
+<span class="fc" id="L24">@Slf4j</span>
 @RequiredArgsConstructor
 public class ShipmentH2RepositoryAdapter implements ShipmentRepositoryPort {
   
@@ -34,65 +35,103 @@ public class ShipmentH2RepositoryAdapter implements ShipmentRepositoryPort {
   private final ShipmentEntityMapper shipmentEntityMapper;
   
   public Shipment findShipmentById(UUID id) {
-
-<span class="fc" id="L38">    ShipmentEntity entity = shipmentH2Repository.findById(id).orElseThrow();</span>
-<span class="fc" id="L39">    Shipment shipment = shipmentEntityMapper.toDomainEntity(entity);</span>
-<span class="fc" id="L40">     log.info(&quot;Loading shipment with id: {}&quot;, shipment.getId());</span>
-
-<span class="fc" id="L42">    shipment.setRoutePlan(routes.getOrDefault(shipment.getId(), List.of()));</span>
-    try {
-<span class="fc" id="L44">      shipment.setOrigin(cityRepositoryPort.findByCityCode(entity.getOriginCode()));</span>
-<span class="fc" id="L45">      shipment.setDestination(cityRepositoryPort.findByCityCode(entity.getDestinationCode()));</span>
-<span class="nc" id="L46">    } catch (ResourceNotFoundException e) {</span>
-<span class="nc" id="L47">      throw new CoreRuntimeException(&quot;City not found for shipment &quot; + entity.getId(), e);</span>
-<span class="fc" id="L48">    }</span>
-<span class="fc" id="L49">    return shipment;</span>
+<span class="fc" id="L38">    return hydrateShipmentWithDetails(id);</span>
   }
 
   @Override
   public void saveShipment(ShipmentInput shipment) {
-<span class="nc" id="L54">    log.trace(&quot;Saving shipment with id: {}&quot;, shipment.getId());</span>
-<span class="nc" id="L55">    shipmentH2Repository.save(shipmentEntityMapper.fromDomainVO(shipment));</span>
+<span class="nc" id="L43">    log.trace(&quot;Saving shipment with id: {}&quot;, shipment.getId());</span>
+<span class="nc" id="L44">    shipmentH2Repository.save(shipmentEntityMapper.fromDomainVO(shipment));</span>
     
-<span class="nc" id="L57">  }</span>
+<span class="nc" id="L46">  }</span>
 
   @Override
   public void saveShipmentPlanification(Shipment shipment) {
-<span class="nc" id="L61">    log.trace(&quot;Saving shipment planification with id: {}&quot;, shipment.getId());</span>
-<span class="nc" id="L62">    shipmentH2Repository.save(shipmentEntityMapper.fromDomainEntity(shipment));</span>
-<span class="nc" id="L63">    routes.put(shipment.getId(), shipment.getRoutePlan());</span>
-<span class="nc" id="L64">  }</span>
+<span class="nc" id="L50">    log.trace(&quot;Saving shipment planification with id: {}&quot;, shipment.getId());</span>
+<span class="nc" id="L51">    shipmentH2Repository.save(shipmentEntityMapper.fromDomainEntity(shipment));</span>
+<span class="nc" id="L52">    routes.put(shipment.getId(), shipment.getRoutePlan());</span>
+<span class="nc" id="L53">  }</span>
 
   @Override
   public void deleteShipment(Shipment shipment) {
-<span class="nc" id="L68">    log.trace(&quot;Delete shipment with id: {}&quot;, shipment.getId());</span>
-<span class="nc" id="L69">    shipmentH2Repository.deleteById(shipment.getId());</span>
-<span class="nc" id="L70">  }</span>
+<span class="nc" id="L57">    log.trace(&quot;Delete shipment with id: {}&quot;, shipment.getId());</span>
+<span class="nc" id="L58">    shipmentH2Repository.deleteById(shipment.getId());</span>
+<span class="nc" id="L59">  }</span>
 
   @Override
   public List&lt;Shipment&gt; findShipments() {
-<span class="nc" id="L74">    log.trace(&quot;Find all shipments&quot;);</span>
+<span class="nc" id="L63">    log.trace(&quot;Find all shipments&quot;);</span>
 
-<span class="nc" id="L76">    List&lt;ShipmentEntity&gt; entities = shipmentH2Repository.findAll();</span>
+<span class="nc" id="L65">    List&lt;ShipmentEntity&gt; entities = shipmentH2Repository.findAll();</span>
 
-<span class="nc" id="L78">      return entities.stream().map(entity -&gt; {</span>
-<span class="nc" id="L79">      Shipment shipment = shipmentEntityMapper.toDomainEntity(entity);</span>
+<span class="nc" id="L67">      return entities.stream().map(entity -&gt; {</span>
+<span class="nc" id="L68">      Shipment shipment = shipmentEntityMapper.toDomainEntity(entity);</span>
 
-<span class="nc" id="L81">      shipment.setRoutePlan(routes.getOrDefault(shipment.getId(), List.of()));</span>
+<span class="nc" id="L70">      shipment.setRoutePlan(routes.getOrDefault(shipment.getId(), List.of()));</span>
       try {
-<span class="nc" id="L83">        shipment.setOrigin(cityRepositoryPort.findByCityCode(entity.getOriginCode()));</span>
-<span class="nc" id="L84">        shipment.setDestination(cityRepositoryPort.findByCityCode(entity.getDestinationCode()));</span>
-<span class="nc" id="L85">      } catch (ResourceNotFoundException e) {</span>
-<span class="nc" id="L86">        throw new CoreRuntimeException(&quot;City not found for shipment &quot; + entity.getId(), e);</span>
-<span class="nc" id="L87">      }</span>
-<span class="nc" id="L88">      return shipment;</span>
-<span class="nc" id="L89">    }).toList();</span>
+<span class="nc" id="L72">        shipment.setOrigin(cityRepositoryPort.findByCityCode(entity.getOriginCode()));</span>
+<span class="nc" id="L73">        shipment.setDestination(cityRepositoryPort.findByCityCode(entity.getDestinationCode()));</span>
+<span class="nc" id="L74">      } catch (ResourceNotFoundException e) {</span>
+<span class="nc" id="L75">        throw new CoreRuntimeException(&quot;City not found for shipment &quot; + entity.getId(), e);</span>
+<span class="nc" id="L76">      }</span>
+<span class="nc" id="L77">      return shipment;</span>
+<span class="nc" id="L78">    }).toList();</span>
   }
 
   @Override
   public void deleteProcessedShipments() {
-<span class="nc" id="L94">    log.trace(&quot;Delete all processed shipments&quot;);</span>
+<span class="nc" id="L83">    log.trace(&quot;Delete all processed shipments&quot;);</span>
     // TODO #4: Implemente deleted processed shipments
-<span class="nc" id="L96">  }</span>
+<span class="nc" id="L85">  }</span>
+
+  private Shipment hydrateShipmentWithDetails(UUID id) {
+    // Consulta join para evitar N+1; si falla, degradar al método clásico
+    try {
+<span class="fc" id="L90">      List&lt;Object&gt; rows = shipmentH2Repository.findShipmentDetails(id);</span>
+<span class="pc bpc" id="L91" title="2 of 4 branches missed.">      if (rows != null &amp;&amp; !rows.isEmpty()) {</span>
+<span class="fc" id="L92">        Object first = rows.get(0);</span>
+<span class="pc bpc" id="L93" title="1 of 2 branches missed.">        if (first instanceof Object[] row) {</span>
+<span class="nc" id="L94">          Shipment shipment = new Shipment();</span>
+<span class="nc" id="L95">          shipment.setId((UUID) row[0]);</span>
+<span class="nc" id="L96">          shipment.setDepartureDate((java.time.OffsetDateTime) row[1]);</span>
+<span class="nc" id="L97">          shipment.setExpectedArrivalDate((java.time.OffsetDateTime) row[2]);</span>
+<span class="nc" id="L98">          shipment.setStatus(com.itxiop.transport.domain.vo.ShipmentStatusEnum.valueOf(row[5].toString()));</span>
+<span class="nc" id="L99">          shipment.setOrigin(toCity(row[6], row[7], row[8]));</span>
+<span class="nc" id="L100">          shipment.setDestination(toCity(row[9], row[10], row[11]));</span>
+<span class="nc" id="L101">          shipment.setRoutePlan(routes.getOrDefault(shipment.getId(), List.of()));</span>
+<span class="nc" id="L102">          return shipment;</span>
+<span class="pc bpc" id="L103" title="1 of 2 branches missed.">        } else if (first instanceof UUID) {</span>
+          // Algunas BD/driver devuelven la primera columna directamente cuando solo hay una fila/columna
+<span class="fc" id="L105">          log.debug(&quot;Detail query returned UUID only; ignoring and using fallback for shipment {}&quot;, id);</span>
+        } else {
+<span class="nc" id="L107">          log.warn(&quot;Detail query returned unexpected type {} for shipment {}&quot;, first.getClass(), id);</span>
+        }
+      }
+<span class="fc" id="L110">    } catch (Exception e) {</span>
+<span class="fc" id="L111">      log.warn(&quot;Fallback to standard load for shipment {} due to detail query failure: {}&quot;, id, e.getMessage());</span>
+<span class="fc" id="L112">    }</span>
+
+    // Fallback al mapeo original
+<span class="fc" id="L115">    ShipmentEntity entity = shipmentH2Repository.findById(id).orElseThrow();</span>
+<span class="fc" id="L116">    Shipment shipment = shipmentEntityMapper.toDomainEntity(entity);</span>
+<span class="fc" id="L117">    shipment.setRoutePlan(routes.getOrDefault(shipment.getId(), List.of()));</span>
+    try {
+<span class="fc" id="L119">      shipment.setOrigin(cityRepositoryPort.findByCityCode(entity.getOriginCode()));</span>
+<span class="fc" id="L120">      shipment.setDestination(cityRepositoryPort.findByCityCode(entity.getDestinationCode()));</span>
+<span class="nc" id="L121">    } catch (ResourceNotFoundException e) {</span>
+<span class="nc" id="L122">      throw new CoreRuntimeException(&quot;City not found for shipment &quot; + entity.getId(), e);</span>
+<span class="fc" id="L123">    }</span>
+<span class="fc" id="L124">    return shipment;</span>
+  }
+
+  private City toCity(Object code, Object name, Object handling) {
+<span class="nc bnc" id="L128" title="All 2 branches missed.">    if (code == null) {</span>
+<span class="nc" id="L129">      return null;</span>
+    }
+<span class="nc" id="L131">    return City.of(</span>
+<span class="nc" id="L132">        code.toString(),</span>
+<span class="nc bnc" id="L133" title="All 2 branches missed.">        name == null ? null : name.toString(),</span>
+<span class="nc bnc" id="L134" title="All 2 branches missed.">        handling == null ? null : new java.math.BigDecimal(handling.toString()));</span>
+  }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>
