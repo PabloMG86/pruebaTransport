@@ -10,8 +10,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2026-01-16T13:10:54+0100",
-    comments = "version: 1.6.0.Beta1, compiler: javac, environment: Java 17.0.17 (Microsoft)"
+    date = "2026-01-16T13:32:04+0100",
+    comments = "version: 1.6.0.Beta1, compiler: Eclipse JDT (IDE) 3.45.0.v20260101-2150, environment: Java 21.0.9 (Eclipse Adoptium)"
 )
 @Component
 public class ShipmentEntityMapperImpl implements ShipmentEntityMapper {
@@ -59,9 +59,9 @@ public class ShipmentEntityMapperImpl implements ShipmentEntityMapper {
 
         shipmentEntity.setOriginCode( shipmentInputOriginCode( shipmentInput ) );
         shipmentEntity.setDestinationCode( shipmentInputDestinationCode( shipmentInput ) );
-        shipmentEntity.setId( shipmentInput.getId() );
         shipmentEntity.setDepartureDate( shipmentInput.getDepartureDate() );
         shipmentEntity.setExpectedArrivalDate( shipmentInput.getExpectedArrivalDate() );
+        shipmentEntity.setId( shipmentInput.getId() );
         shipmentEntity.setStatus( shipmentInput.getStatus() );
 
         return shipmentEntity;
@@ -77,9 +77,9 @@ public class ShipmentEntityMapperImpl implements ShipmentEntityMapper {
 
         shipmentEntity.setOriginCode( shipmentOriginCode( shipment ) );
         shipmentEntity.setDestinationCode( shipmentDestinationCode( shipment ) );
-        shipmentEntity.setId( shipment.getId() );
         shipmentEntity.setDepartureDate( shipment.getDepartureDate() );
         shipmentEntity.setExpectedArrivalDate( shipment.getExpectedArrivalDate() );
+        shipmentEntity.setId( shipment.getId() );
         shipmentEntity.setStatus( shipment.getStatus() );
 
         return shipmentEntity;

@@ -28,7 +28,7 @@ import jakarta.annotation.Generated;
  */
 
 @Schema(name = "Shipment", description = "Shipment aggregated information")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-01-16T13:10:48.635976600+01:00[Europe/Madrid]", comments = "Generator version: 7.18.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-01-16T13:31:59.507203200+01:00[Europe/Madrid]", comments = "Generator version: 7.18.0")
 public class Shipment {
 
   private UUID shipmentId;

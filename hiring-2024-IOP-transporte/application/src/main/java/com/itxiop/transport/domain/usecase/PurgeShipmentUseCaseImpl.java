@@ -17,7 +17,5 @@ public class PurgeShipmentUseCaseImpl implements PurgeShipmentUseCase {
         log.trace("Purging processed shipments");
         shipmentRepositoryPort.deleteProcessedShipments();
         
-        
-        
     }
 }

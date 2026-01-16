@@ -24,6 +24,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.lenient;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -95,5 +96,15 @@ class ShipmentH2RepositoryAdapterTest {
     assertThat(result.getId(), equalTo(shipmentId));
     assertThat(result.getOrigin().getCode(), equalTo("BER"));
     assertThat(result.getDestination().getCode(), equalTo("REY"));
+  }
+
+  @Test
+  void deleteProcessedShipmentsDelegatesToRepository() {
+    when(shipmentH2Repository.deleteProcessed(com.itxiop.transport.domain.vo.ShipmentStatusEnum.PENDING))
+        .thenReturn(2);
+
+    adapter.deleteProcessedShipments();
+
+    verify(shipmentH2Repository).deleteProcessed(com.itxiop.transport.domain.vo.ShipmentStatusEnum.PENDING);
   }
 }

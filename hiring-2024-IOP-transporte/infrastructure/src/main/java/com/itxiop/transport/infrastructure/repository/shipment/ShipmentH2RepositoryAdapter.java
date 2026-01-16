@@ -81,7 +81,9 @@ public class ShipmentH2RepositoryAdapter implements ShipmentRepositoryPort {
   @Override
   public void deleteProcessedShipments() {
     log.trace("Delete all processed shipments");
-    // TODO #4: Implemente deleted processed shipments
+    int deleted = shipmentH2Repository.deleteProcessed(com.itxiop.transport.domain.vo.ShipmentStatusEnum.PENDING);
+    routes.keySet().removeIf(id -> !shipmentH2Repository.existsById(id));
+    log.info("Deleted {} processed shipments", deleted);
   }
 
   private Shipment hydrateShipmentWithDetails(UUID id) {
