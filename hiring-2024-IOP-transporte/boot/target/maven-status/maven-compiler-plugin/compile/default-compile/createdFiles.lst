@@ -1,2 +1,3 @@
 com\itxiop\transport\Application.class
 com\itxiop\transport\config\UseCaseProviderFactory.class
+com\itxiop\transport\config\WebConfig.class

@@ -1,4 +1,3 @@
-com\itxiop\transport\infrastructure\apirest\ShipmentsApiControllerTest.class
 com\itxiop\transport\infrastructure\repository\ShipmentH2RepositoryAdapterTest.class
 com\itxiop\transport\infrastructure\apirest\ShipmentApiControllerConfig.class
 com\itxiop\transport\infrastructure\apirest\TestApplication.class
