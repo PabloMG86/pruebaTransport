@@ -9,6 +9,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.itxiop.transport.domain.city.repository.CityRepositoryPort;
 import com.itxiop.transport.domain.entities.City;
+import com.itxiop.transport.domain.exceptions.ResourceNotFoundException;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.InitializingBean;
@@ -16,26 +17,30 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 
-<span class="fc" id="L19">@Slf4j</span>
-<span class="fc" id="L20">public class CityRepositoryFileAdapter implements CityRepositoryPort, InitializingBean {</span>
+<span class="fc" id="L20">@Slf4j</span>
+<span class="fc" id="L21">public class CityRepositoryFileAdapter implements CityRepositoryPort, InitializingBean {</span>
 
-<span class="fc" id="L22">  private final Map&lt;String, City&gt; citiesMap = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L23">  private final Map&lt;String, City&gt; citiesMap = new HashMap&lt;&gt;();</span>
 
   @Override
   public void afterPropertiesSet() throws Exception {
-<span class="fc" id="L26">    log.trace(&quot;CityRepositoryAdapter. File version initialized&quot;);</span>
-<span class="fc" id="L27">    readCityHandlings();</span>
-<span class="fc" id="L28">  }</span>
+<span class="fc" id="L27">    log.trace(&quot;CityRepositoryAdapter. File version initialized&quot;);</span>
+<span class="fc" id="L28">    readCityHandlings();</span>
+<span class="fc" id="L29">  }</span>
 
   private void readCityHandlings() throws IOException {
-<span class="fc" id="L31">    List&lt;City&gt; cities = new ObjectMapper().readValue(new ClassPathResource(&quot;cities.json&quot;).getFile(), new TypeReference&lt;List&lt;City&gt;&gt;() {</span>
+<span class="fc" id="L32">    List&lt;City&gt; cities = new ObjectMapper().readValue(new ClassPathResource(&quot;cities.json&quot;).getFile(), new TypeReference&lt;List&lt;City&gt;&gt;() {</span>
     });
-<span class="fc" id="L33">    cities.forEach(city -&gt; citiesMap.put(city.getCode(), city));</span>
-<span class="fc" id="L34">  }</span>
+<span class="fc" id="L34">    cities.forEach(city -&gt; citiesMap.put(city.getCode(), city));</span>
+<span class="fc" id="L35">  }</span>
 
   @Override
-  public City findByCityCode(String code) {
-<span class="fc" id="L38">    return citiesMap.get(code);</span>
+  public City findByCityCode(String code) throws ResourceNotFoundException {
+<span class="fc" id="L39">    City city = citiesMap.get(code);</span>
+<span class="pc bpc" id="L40" title="1 of 2 branches missed.">    if (city == null) {</span>
+<span class="nc" id="L41">      throw new ResourceNotFoundException(&quot;City &quot; + code + &quot; not found&quot;);</span>
+    }
+<span class="fc" id="L43">    return city;</span>
   }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

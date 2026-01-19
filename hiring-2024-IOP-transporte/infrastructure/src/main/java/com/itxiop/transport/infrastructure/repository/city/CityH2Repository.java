@@ -1,10 +1,11 @@
 package com.itxiop.transport.infrastructure.repository.city;
 
-import com.itxiop.transport.domain.shipment.repository.ShipmentRepositoryPort;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 /**
- * <p> Implementation of {@link ShipmentRepositoryPort} with H2 database </p>
+ * Repositorio JPA para ciudades en H2.
  */
-public interface CityH2Repository {
-
+@Repository
+public interface CityH2Repository extends JpaRepository<CityEntity, String> {
 }

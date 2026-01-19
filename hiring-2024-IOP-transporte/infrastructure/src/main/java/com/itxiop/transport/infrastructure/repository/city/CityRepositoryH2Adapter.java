@@ -2,24 +2,41 @@ package com.itxiop.transport.infrastructure.repository.city;
 
 import com.itxiop.transport.domain.city.repository.CityRepositoryPort;
 import com.itxiop.transport.domain.entities.City;
-import lombok.AllArgsConstructor;
+import com.itxiop.transport.domain.exceptions.ResourceNotFoundException;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.NotImplementedException;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Slf4j
+@Component
 public class CityRepositoryH2Adapter implements CityRepositoryPort, InitializingBean {
   
       private final CityH2Repository cityH2Repository;
       
-      private CityEntityMapper cityEntityMapper;
+      private final CityEntityMapper cityEntityMapper;
+
+      @Autowired(required = false)
+      private CityRepositoryFileAdapter fallbackFileAdapter;
 
       @Override
-      public City findByCityCode(String code) {
-            // TODO #5: Implement database search
-            throw new NotImplementedException("findByCode not implemented in H2 Port adapter. You may refer to CityRepositoryFileAdapter" +
-                    " or is something missing here?");
+      public City findByCityCode(String code) throws ResourceNotFoundException {
+            // Primero intenta en BBDD
+            var entity = cityH2Repository.findById(code);
+            if (entity.isPresent()) {
+                  return cityEntityMapper.toDomainEntity(entity.get());
+            }
+            // Fallback al adaptador de fichero si está presente
+            if (fallbackFileAdapter != null) {
+                  try {
+                        return fallbackFileAdapter.findByCityCode(code);
+                  } catch (ResourceNotFoundException ignored) {
+                        // ignoramos para lanzar la excepción estándar abajo
+                  }
+            }
+            throw new ResourceNotFoundException("City " + code + " not found");
       }
 
       @Override

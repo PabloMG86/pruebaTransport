@@ -9,6 +9,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.itxiop.transport.domain.city.repository.CityRepositoryPort;
 import com.itxiop.transport.domain.entities.City;
+import com.itxiop.transport.domain.exceptions.ResourceNotFoundException;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.InitializingBean;
@@ -34,7 +35,11 @@ public class CityRepositoryFileAdapter implements CityRepositoryPort, Initializi
   }
 
   @Override
-  public City findByCityCode(String code) {
-    return citiesMap.get(code);
+  public City findByCityCode(String code) throws ResourceNotFoundException {
+    City city = citiesMap.get(code);
+    if (city == null) {
+      throw new ResourceNotFoundException("City " + code + " not found");
+    }
+    return city;
   }
 }

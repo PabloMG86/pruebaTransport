@@ -4,23 +4,25 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.data.jpa.JpaRepositoriesAutoConfiguration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @AutoConfigureAfter(JpaRepositoriesAutoConfiguration.class)
-<span class="fc" id="L12">@Slf4j</span>
-<span class="fc" id="L13">public class CityRepositoryManagerAutoConfiguration {</span>
+<span class="fc" id="L13">@Slf4j</span>
+<span class="fc" id="L14">public class CityRepositoryManagerAutoConfiguration {</span>
     // DO NOT REMOVE ME FOR TASK 6
     @Bean
     CityRepositoryFileAdapter cityRepositoryFileAdapter() {
-<span class="fc" id="L17">        return new CityRepositoryFileAdapter();</span>
+<span class="fc" id="L18">        return new CityRepositoryFileAdapter();</span>
     }
 
     @Bean
+    @Primary
     @ConditionalOnBean(CityH2Repository.class)
     CityRepositoryH2Adapter cityRepositoryH2Adapter(CityH2Repository cityH2Repository, CityEntityMapper cityEntityMapper) {
-<span class="nc" id="L23">        return new CityRepositoryH2Adapter(cityH2Repository, cityEntityMapper);</span>
+<span class="fc" id="L25">        return new CityRepositoryH2Adapter(cityH2Repository, cityEntityMapper);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

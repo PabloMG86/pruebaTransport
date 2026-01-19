@@ -34,11 +34,12 @@ class ShipmentH2RepositoryPortTest {
   @Test
   void findShipmentTest() {
 
-    ShipmentEntity shipmentToSave =
-        Instancio.of(ShipmentEntity.class).create();
-    // TODO #5: Consider updating this test once ShipmentEntity is associated with a database CityEntity
-    // this.cityH2Repository.save(shipmentToSave.getOrigin());
-    // this.cityH2Repository.save(shipmentToSave.getDestination());
+    ShipmentEntity shipmentToSave = Instancio.of(ShipmentEntity.class)
+        .set(field(ShipmentEntity::getOriginCode), "MAD")
+        .set(field(ShipmentEntity::getDestinationCode), "BCN")
+        .set(field(ShipmentEntity::getOrigin), (com.itxiop.transport.infrastructure.repository.city.CityEntity) null)
+        .set(field(ShipmentEntity::getDestination), (com.itxiop.transport.infrastructure.repository.city.CityEntity) null)
+        .create();
     this.shipmentH2Repository.save(shipmentToSave);
     final Shipment shipment = this.repositoryPort.findShipmentById(shipmentToSave.getId());
     Assertions.assertNotNull(shipment);

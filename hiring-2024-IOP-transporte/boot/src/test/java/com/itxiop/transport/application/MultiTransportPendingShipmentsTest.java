@@ -5,6 +5,7 @@ import com.itxiop.transport.config.UseCaseProviderFactory;
 import com.itxiop.transport.domain.entities.City;
 import com.itxiop.transport.domain.entities.Route;
 import com.itxiop.transport.domain.entities.Shipment;
+import com.itxiop.transport.domain.exceptions.ResourceNotFoundException;
 import com.itxiop.transport.domain.shipment.repository.ShipmentRepositoryPort;
 import com.itxiop.transport.domain.usecase.ProcessPendingShipmentsUseCase;
 import com.itxiop.transport.domain.vo.ShipmentStatusEnum;
@@ -61,7 +62,7 @@ public class MultiTransportPendingShipmentsTest {
 
     @ParameterizedTest(name = "Multi transport pending shipments test")
     @MethodSource("provideCityCombinations")
-    void multiTransportPendingShipmentsTest(String originCityCode, String destinationCityCode, Long expectedCost){
+    void multiTransportPendingShipmentsTest(String originCityCode, String destinationCityCode, Long expectedCost) throws ResourceNotFoundException {
 
         // Change the graph folder to the one with multiple transport types to execute these tests.
         Assumptions.assumeTrue(testGraphFolder.equals("multipleTransportTypes"), "Test configured only 4 multiple transport types");

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.itxiop.transport.domain.usecase.FindShipmentByIdUseCaseTest" time="2.433" tests="1" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.itxiop.transport.domain.usecase.FindShipmentByIdUseCaseTest" time="2.489" tests="1" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="17"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -15,7 +15,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="ES"/>
     <property name="sun.boot.library.path" value="C:\Users\pablo.miguelgarcia\.jdks\ms-17.0.17\bin"/>
-    <property name="sun.java.command" value="C:\Users\pablo.miguelgarcia\AppData\Local\Temp\surefire10973497342803106098\surefirebooter-20260116133153214_3.jar C:\Users\pablo.miguelgarcia\AppData\Local\Temp\surefire10973497342803106098 2026-01-16T13-31-50_851-jvmRun1 surefire-20260116133153214_1tmp surefire_0-20260116133153214_2tmp"/>
+    <property name="sun.java.command" value="C:\Users\pablo.miguelgarcia\AppData\Local\Temp\surefire330333102319530059\surefirebooter-20260119072438395_3.jar C:\Users\pablo.miguelgarcia\AppData\Local\Temp\surefire330333102319530059 2026-01-19T07-24-36_182-jvmRun1 surefire-20260119072438395_1tmp surefire_0-20260119072438395_2tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="C:\Desarrollo\DISDEP_RUPER\pruebaTransport\hiring-2024-IOP-transporte\application\target\test-classes;C:\Desarrollo\DISDEP_RUPER\pruebaTransport\hiring-2024-IOP-transporte\application\target\classes;C:\Desarrollo\DISDEP_RUPER\pruebaTransport\hiring-2024-IOP-transporte\domain\target\hiring-challenge-domain-0.1.0-SNAPSHOT.jar;C:\Desarrollo\repo-maven\org\slf4j\slf4j-api\2.0.12\slf4j-api-2.0.12.jar;C:\Desarrollo\repo-maven\org\apache\commons\commons-lang3\3.13.0\commons-lang3-3.13.0.jar;C:\Desarrollo\repo-maven\org\instancio\instancio-junit\4.5.0\instancio-junit-4.5.0.jar;C:\Desarrollo\repo-maven\org\instancio\instancio-core\4.5.0\instancio-core-4.5.0.jar;C:\Desarrollo\repo-maven\org\junit\jupiter\junit-jupiter-engine\5.10.2\junit-jupiter-engine-5.10.2.jar;C:\Desarrollo\repo-maven\org\junit\platform\junit-platform-engine\1.10.2\junit-platform-engine-1.10.2.jar;C:\Desarrollo\repo-maven\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Desarrollo\repo-maven\org\junit\platform\junit-platform-commons\1.10.2\junit-platform-commons-1.10.2.jar;C:\Desarrollo\repo-maven\org\junit\jupiter\junit-jupiter-api\5.10.2\junit-jupiter-api-5.10.2.jar;C:\Desarrollo\repo-maven\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Desarrollo\repo-maven\org\mockito\mockito-core\5.7.0\mockito-core-5.7.0.jar;C:\Desarrollo\repo-maven\net\bytebuddy\byte-buddy\1.14.12\byte-buddy-1.14.12.jar;C:\Desarrollo\repo-maven\net\bytebuddy\byte-buddy-agent\1.14.12\byte-buddy-agent-1.14.12.jar;C:\Desarrollo\repo-maven\org\objenesis\objenesis\3.3\objenesis-3.3.jar;C:\Desarrollo\repo-maven\org\mockito\mockito-junit-jupiter\5.7.0\mockito-junit-jupiter-5.7.0.jar;C:\Desarrollo\repo-maven\org\hamcrest\hamcrest\2.2\hamcrest-2.2.jar;C:\Desarrollo\repo-maven\ch\qos\logback\logback-classic\1.4.14\logback-classic-1.4.14.jar;C:\Desarrollo\repo-maven\ch\qos\logback\logback-core\1.4.14\logback-core-1.4.14.jar;C:\Desarrollo\repo-maven\org\projectlombok\lombok\1.18.30\lombok-1.18.30.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -30,7 +30,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="C:\Users\pablo.miguelgarcia\AppData\Local\Temp\surefire10973497342803106098\surefirebooter-20260116133153214_3.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\pablo.miguelgarcia\AppData\Local\Temp\surefire330333102319530059\surefirebooter-20260119072438395_3.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="17.0.17+10-LTS"/>
@@ -59,8 +59,8 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="61.0"/>
   </properties>
-  <testcase name="findShipmentByIdTest" classname="com.itxiop.transport.domain.usecase.FindShipmentByIdUseCaseTest" time="2.366">
-    <system-out><![CDATA[13:31:56.863 [main] TRACE c.i.t.d.u.FindShipmentUseCaseImpl -- Find shipment by id d043c024-a85e-4e0f-81e6-81ea6e1db3f1
+  <testcase name="findShipmentByIdTest" classname="com.itxiop.transport.domain.usecase.FindShipmentByIdUseCaseTest" time="2.428">
+    <system-out><![CDATA[07:24:41.943 [main] TRACE c.i.t.d.u.FindShipmentUseCaseImpl -- Find shipment by id 130e7d9c-4b23-4a96-b0de-2fab322a008a
 ]]></system-out>
   </testcase>
 </testsuite>

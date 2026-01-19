@@ -2,29 +2,46 @@
 
 import com.itxiop.transport.domain.city.repository.CityRepositoryPort;
 import com.itxiop.transport.domain.entities.City;
-import lombok.AllArgsConstructor;
+import com.itxiop.transport.domain.exceptions.ResourceNotFoundException;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.NotImplementedException;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-@AllArgsConstructor
-<span class="nc" id="L11">@Slf4j</span>
+@RequiredArgsConstructor
+<span class="fc" id="L13">@Slf4j</span>
+@Component
 public class CityRepositoryH2Adapter implements CityRepositoryPort, InitializingBean {
   
       private final CityH2Repository cityH2Repository;
       
-      private CityEntityMapper cityEntityMapper;
+      private final CityEntityMapper cityEntityMapper;
+
+      @Autowired(required = false)
+      private CityRepositoryFileAdapter fallbackFileAdapter;
 
       @Override
-      public City findByCityCode(String code) {
-            // TODO #5: Implement database search
-<span class="nc" id="L21">            throw new NotImplementedException(&quot;findByCode not implemented in H2 Port adapter. You may refer to CityRepositoryFileAdapter&quot; +</span>
-                    &quot; or is something missing here?&quot;);
+      public City findByCityCode(String code) throws ResourceNotFoundException {
+            // Primero intenta en BBDD
+<span class="fc" id="L27">            var entity = cityH2Repository.findById(code);</span>
+<span class="pc bpc" id="L28" title="1 of 2 branches missed.">            if (entity.isPresent()) {</span>
+<span class="nc" id="L29">                  return cityEntityMapper.toDomainEntity(entity.get());</span>
+            }
+            // Fallback al adaptador de fichero si está presente
+<span class="pc bpc" id="L32" title="1 of 2 branches missed.">            if (fallbackFileAdapter != null) {</span>
+                  try {
+<span class="fc" id="L34">                        return fallbackFileAdapter.findByCityCode(code);</span>
+<span class="nc" id="L35">                  } catch (ResourceNotFoundException ignored) {</span>
+                        // ignoramos para lanzar la excepción estándar abajo
+                  }
+            }
+<span class="nc" id="L39">            throw new ResourceNotFoundException(&quot;City &quot; + code + &quot; not found&quot;);</span>
       }
 
       @Override
       public void afterPropertiesSet() throws Exception {
-<span class="nc" id="L27">            log.trace(&quot;CityRepositoryAdapter. H2 version initialized&quot;);</span>
-<span class="nc" id="L28">      }</span>
+<span class="fc" id="L44">            log.trace(&quot;CityRepositoryAdapter. H2 version initialized&quot;);</span>
+<span class="fc" id="L45">      }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>
