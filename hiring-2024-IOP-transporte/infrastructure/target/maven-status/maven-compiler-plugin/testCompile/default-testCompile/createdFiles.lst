@@ -1,6 +1,0 @@
-com\itxiop\transport\infrastructure\repository\ShipmentH2RepositoryAdapterTest.class
-com\itxiop\transport\infrastructure\apirest\ShipmentApiControllerConfig.class
-com\itxiop\transport\infrastructure\apirest\TestApplication.class
-com\itxiop\transport\infrastructure\TestInfrastructureApplication.class
-com\itxiop\transport\infrastructure\repository\RouteRepositoryFileAdapterTest.class
-com\itxiop\transport\infrastructure\repository\CityRepositoryH2AdapterIT.class
