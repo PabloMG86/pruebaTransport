@@ -301,6 +301,32 @@ Si sólo tuviese que implementar eventos para el escenario de procesamiento de r
 ## Respuesta téoricas
 
 > TBC
+> ¿Sabría aplicar el uso de Spring Events al proyecto en cuestión?
+> 
+> Si, añadiento @EventListener para desacoplar los distintos casos de uso, además se podría usar @Async para registrar métricas, auditorías, o notificaciones.
+> 
+> ¿Qué eventos serían interesantes de capturar / enviar?
+> 
+> ShipmentLoadedEvent, ShipmentProcessedEvent, ShipmentPurgedEvent, RouteComputationFailedEvent.
+> 
+> ¿Qué principios SOLID se aplicarían en la implementación de eventos y porqué?
+> - SRP( Eventos), 
+> - OCP (no se modifican los caso de uso),
+> - LSP(los handlers implementan la misma interface),
+> - ISP( separando interfaces para no hacer un handler extenso), 
+> - DIP (depende de una abstrciones y no de implementación).
+> 
+> Si sólo tuviese que implementar eventos para el escenario de procesamiento de rutas, ¿Cómo lo haría? (teórico)
+> 
+> - Habría que definir y crear el evento por ejemplo una clase RouteProcessedEvent que incluya id, status, routs, fecha.
+> - habría que inyectar el publisher en el caso de uso (ProcessPendingShipmentsUseCaseImpl)
+> - Decidir en que punto se llamaría al evento, después de guardar en BBDD o al terminar el proceso.
+> - Ajustar el constructor de la implementación del caso de uso para aceptar el publisher del punto 2.
+> - Test unitarios.
+> - Pruebas 
+
+
+
 
 
 
